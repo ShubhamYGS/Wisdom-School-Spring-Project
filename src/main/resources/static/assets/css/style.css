@@ -15,6 +15,7 @@
 
     01.COMMON 
     02.HEADER
+    03.BRAND
     04.SERVICES
     05.ABOUT
     06.VIDEO COUNTER
@@ -812,6 +813,39 @@ p {
       padding-top: 30px; } }
 
 /*===========================
+      03.BRAND css 
+===========================*/
+@media (max-width: 767px) {
+  .brand-logo {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; } }
+
+.single-logo {
+  padding: 0 30px; }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .single-logo {
+      padding: 0 15px; } }
+  @media (max-width: 767px) {
+    .single-logo {
+      padding: 0 15px; } }
+  @media (max-width: 767px) {
+    .single-logo {
+      width: 50%; } }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    .single-logo {
+      width: 33.33%; } }
+  .single-logo img {
+    width: 100%;
+    opacity: 0.5;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s; }
+  .single-logo:hover img {
+    opacity: 1; }
+
+/*===========================
       04.SERVICES css 
 ===========================*/
 .single-services {
@@ -1234,110 +1268,37 @@ p {
 /*===========================
        09.BLOG  css 
 ===========================*/
+.single-blog .blog-image img {
+  border-radius: 10px;
+  width: 100%; }
 
-.w3l-grids-block-5 .content-main-top h4 a {
-  color: var(--heading-color);
-  font-size: 22px;
-  margin-bottom: 8px;
-  display: block;
-  font-weight: 600;
-  line-height: 32px;
-}
-
-.w3l-grids-block-5 .content-main-top h4 a:hover {
-  color: var(--primary-color);
-}
-
-.w3l-grids-block-5 .coursecard-single {
-  box-shadow: 0px 30px 40px 0px rgb(1 11 60 / 10%);
-  transition: .3s ease;
-  -webkit-transition: .3s ease;
-  background: var(--bg-color);
-  border-radius: var(--border-radius);
-}
-
-.w3l-grids-block-5 .grids5-info {
-  overflow: hidden;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.w3l-grids-block-5 .grids5-info img {
-  display: block;
-  width: 100%;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  transition: 0.3s ease-in-out;
-}
-
-.w3l-grids-block-5 .coursecard-single:hover img {
-  overflow: hidden;
-  transform: scale(1.1);
-  transition: 0.3s ease-in-out;
-}
-
-.w3l-grids-block-5 .content-main-top {
-  padding: 20px;
-  border: none;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-.meta-list {
-  position: absolute;
-  left: 30px;
-  top: 15px;
-}
-
-.meta-list a {
-  background: #1DC295;
-  display: inline-block;
-  border-radius: 3px;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  color: #FFFFFF !important;
-  text-transform: capitalize;
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.meta-list a.sec-2 {
-  background-color: #FFA100;
-}
-
-.meta-list a.sec-3 {
-  background: #037ef3;
-}
-
-.top-content-border {
-  border-top: 1px solid var(--border-color-light)
-}
-
-.btn-style-primary {
-  padding: 0;
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--heading-color);
-}
-
-.btn-style-primary:hover {
-  color: var(--primary-color);
-}
-
-.btn-style-primary i {
-  margin-left: 4px;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+.single-blog .blog-content {
+  padding-top: 25px; }
+  .single-blog .blog-content .meta li {
+    font-size: 16px;
+    color: #6A6972;
+    display: inline-block;
+    margin-left: 50px; }
+    .single-blog .blog-content .meta li:first-child {
+      margin-left: 0; }
+    .single-blog .blog-content .meta li a {
+      color: #6A6972; }
+  .single-blog .blog-content .text {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #2E2E2E;
+    margin-top: 15px; }
+    @media (max-width: 767px) {
+      .single-blog .blog-content .text {
+        font-size: 20px;
+        line-height: 30px; } }
+  .single-blog .blog-content .more {
+    font-size: 16px;
+    color: #FE7E71;
+    margin-top: 30px; }
+    .single-blog .blog-content .more i {
+      margin-left: 5px; }
 
 /*===========================
        10.SUBSCRIBE  css 
