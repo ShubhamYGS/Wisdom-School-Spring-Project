@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wisdom School</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style-starter.css">
+</head>
+
+<body>
+<section class="h-100 home-course-bg">
+  <div class="container h-100">
+    <div class="row justify-content-sm-center h-100">
+      <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+          <header id="site-header" >
+            <div class="container">
+              <nav class="navbar">
+                <a class="navbar-brand" th:href="@{/index}"><i class="fas fa-graduation-cap"></i>Wisdom School
+                </a>
+                <div class="theme-switch-wrapper">
+                  <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox">
+                    <div class="mode-container">
+                      <i class="gg-sun"></i>
+                      <i class="gg-moon"></i>
+                    </div>
+                  </label>
+                </div>
+              </nav>
+            </div>
+          </header>
+        <div class="card shadow-lg">
+          <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+            <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+              <div class="mb-3">
+                <label class="mb-2 text-muted" for="email">E-Mail Address</label>
+                <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+                <div class="invalid-feedback">
+                  Email is invalid
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="mb-2 w-100">
+                  <label class="text-muted" for="password">Password</label>
+                  <a href="forgot.html" class="float-end">
+                    Forgot Password?
+                  </a>
+                </div>
+                <input id="password" type="password" class="form-control" name="password" required>
+                <div class="invalid-feedback">
+                  Password is required
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center">
+                <div class="form-check">
+                  <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                  <label for="remember" class="form-check-label">Remember Me</label>
+                </div>
+                <button type="submit" class="btn main-btn ms-auto">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer py-3 border-0">
+            <div class="text-center">
+              Don't have an account? <b><a th:href="@{/register}">Create One</a></b>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5 text-muted">
+          Copyright &copy; 2017-2022 &mdash; Wisdom School
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/login.js"></script>
+<button onclick="topFunction()" id="movetop" title="Go to top">
+  <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+</button>
+<script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+<!-- //move top -->
+
+<!-- common jquery plugin -->
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<!-- //common jquery plugin -->
+
+<!-- /counter-->
+<script src="assets/js/counter.js"></script>
+<!-- //counter-->
+
+<!-- theme switch js (light and dark)-->
+<script src="assets/js/theme-change.js"></script>
+<!-- //theme switch js (light and dark)-->
+
+<!-- MENU-JS -->
+<script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+<!-- //MENU-JS -->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+<!-- //disable body scroll which navbar is in active -->
+
+<!-- bootstrap -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- //bootstrap -->
+<!-- //Js scripts -->
+</body>
+</html>
