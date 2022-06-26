@@ -7323,6 +7323,7 @@ fieldset:disabled .btn {
 
 .position-static {
   position: static !important;
+  margin-left: 60px;
 }
 
 .position-relative {
@@ -19449,8 +19450,8 @@ p.banner-sub {
 
 @media (max-width: 1440px) {
   .sub-banner-image {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 500px;
+    max-height: 500px;
   }
 
   .sub-banner-image img {
