@@ -56,19 +56,19 @@ Author URL: http://w3layouts.com
                             <div class="row">
                                 <div class="col-sm-6">
                                     <input type="text" th:field="*{name}" placeholder="Your Name"
-                                        class="contact-input" />
+                                        class="contact-input" required/>
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="email" th:field="*{email}" placeholder="Your Email"
-                                        class="contact-input" />
+                                        class="contact-input" required/>
                                 </div>
                             </div>
                             <input type="text" th:field="*{subject}" placeholder="Subject"
-                                class="contact-input" />
+                                class="contact-input" required/>
                         </div>
                         <div class="form-input">
                             <textarea name="message" th:field="*{message}" placeholder="Type your message here"
-                            ></textarea>
+                            required ></textarea>
                         </div>
                         <div class="text-start">
                             <button class="btn btn-style btn-style-3">Send Message</button>
