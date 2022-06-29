@@ -41,13 +41,13 @@ public class ContactController {
 //    }
 
     //Second way using POJO class and service class
-     @PostMapping(value = "/saveMsg")
-     public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
+    @PostMapping(value = "/saveMsg")
+    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
         if(errors.hasErrors()) {
             log.error("Contact form validation failed due to: "+errors);
             return "contact.html";
         }
         contactService.saveMessageDetails(contact);
         return "redirect:/contact";
-     }
+    }
 }
