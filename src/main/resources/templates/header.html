@@ -19,16 +19,21 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/index}">Home</a>
+                        <a th:classappend="${(#httpServletRequest.getRequestURI() == '/index' ? 'active':'')+
+                        (#httpServletRequest.getRequestURI() == '/' ? 'active':'')}"
+                           class="nav-link" th:href="@{/index}" aria-current="page">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/courses}">Courses</a>
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/courses' ? 'active':''}"
+                           class="nav-link" th:href="@{/courses}">Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/contact}">Contact</a>
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? 'active':''}"
+                           class="nav-link" th:href="@{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/about}">About Us</a>
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active':''}"
+                           class="nav-link" th:href="@{/about}">About Us</a>
                     </li>
                 </ul>
                 <ul>
