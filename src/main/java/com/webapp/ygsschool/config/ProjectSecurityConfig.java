@@ -35,12 +35,15 @@ public class ProjectSecurityConfig  {
          */
         http
                 .authorizeHttpRequests( (auth)->auth
-                    .antMatchers("/holidays","/courses","/contact").authenticated()
-                    .antMatchers("/","/index","/about","/login","/register").permitAll()
+//                    .mvcMatchers("/holidays","/courses","/contact").authenticated()
+//                    .mvcMatchers("/","/index","/about","/login","/register").permitAll()
+                        .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin()
-                    .loginPage("/login");
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/index").failureUrl("/login?error=true").permitAll()
+                .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll();
         return http.build();
 
         /**
