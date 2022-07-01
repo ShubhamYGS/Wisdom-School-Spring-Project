@@ -35,9 +35,9 @@ public class ProjectSecurityConfig  {
          */
         http
                 .authorizeHttpRequests( (auth)->auth
-//                    .mvcMatchers("/holidays","/courses","/contact").authenticated()
-//                    .mvcMatchers("/","/index","/about","/login","/register").permitAll()
-                        .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
+                    .mvcMatchers("/holidays","/courses","/contact").authenticated()
+                    .mvcMatchers("/","/index","/about","/login","/register").permitAll()
+                   //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin()
