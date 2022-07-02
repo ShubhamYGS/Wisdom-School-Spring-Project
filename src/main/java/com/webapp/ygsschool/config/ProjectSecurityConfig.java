@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -40,10 +44,14 @@ public class ProjectSecurityConfig  {
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
-                .formLogin()
+                .formLogin(form ->form
                     .loginPage("/login")
-                    .defaultSuccessUrl("/index").failureUrl("/login?error=true").permitAll()
-                .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll();
+                    .defaultSuccessUrl("/index").failureUrl("/login?error=true").permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout=true")
+                        .invalidateHttpSession(true)
+                        .permitAll());
+
         return http.build();
 
         /**
@@ -63,4 +71,21 @@ public class ProjectSecurityConfig  {
 		return http.build();*/
     }
 
+    //Creating our own inmemory database
+    @Bean
+    public UserDetailsService users() {
+        // The builder will ensure the passwords are encoded before saving in memory
+        User.UserBuilder users = User.withDefaultPasswordEncoder();
+        UserDetails user = users
+                .username("user@gmail.com")
+                .password("1234")
+                .roles("USER")
+                .build();
+        UserDetails admin = users
+                .username("admin@gmail.com")
+                .password("4321")
+                .roles("USER", "ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin);
+    }
 }

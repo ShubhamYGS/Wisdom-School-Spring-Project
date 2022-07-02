@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.com"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:th="http://www.thymeleaf.com">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -17,7 +16,7 @@
 </head>
 
 <body>
-<section class="h-100">
+<section class="h-100 home-course-bg">
   <!-- header -->
   <div id="header" th:replace="header :: header"></div>
   <!-- //header -->
@@ -40,10 +39,13 @@
         <div class="card shadow-lg">
           <div class="card-body p-5">
             <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
-            <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+            <form th:action="@{/login}" method="POST" class="needs-validation" novalidate="" autocomplete="off">
+              <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+                  th:text="${errorMessage}"
+              />
               <div class="mb-3">
-                <label class="mb-2 text-muted" for="email">E-Mail Address</label>
-                <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+                <label class="mb-2 text-muted" for="username">E-Mail Address</label>
+                <input id="username" type="username" class="form-control" name="username" value="" required autofocus>
                 <div class="invalid-feedback">
                   Email is invalid
                 </div>
@@ -78,9 +80,6 @@
               Don't have an account? <b><a th:href="@{/register}">Create One</a></b>
             </div>
           </div>
-        </div>
-        <div class="text-center mt-5 text-muted">
-          Copyright &copy; 2017-2022 &mdash; Wisdom School
         </div>
       </div>
     </div>
