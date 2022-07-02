@@ -39,14 +39,14 @@ public class ProjectSecurityConfig  {
          */
         http
                 .authorizeHttpRequests( (auth)->auth
-                    .mvcMatchers("/holidays","/courses","/contact").authenticated()
+                    .mvcMatchers("/holidays","/courses","/contact","/dashboard").authenticated()
                     .mvcMatchers("/","/index","/about","/login","/register").permitAll()
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form ->form
                     .loginPage("/login")
-                    .defaultSuccessUrl("/index").failureUrl("/login?error=true").permitAll())
+                    .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true)

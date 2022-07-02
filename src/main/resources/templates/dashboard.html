@@ -1,6 +1,11 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.com">
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -16,80 +21,43 @@
 </head>
 
 <body>
-<section class="h-100 home-course-bg">
-  <!-- header -->
-  <div id="header" th:replace="header :: header"></div>
-  <!-- //header -->
-  <!-- inner banner -->
-  <section class="inner-banner py-4">
-    <div class="w3l-breadcrumb py-lg-4">
-      <div class="container pt-4 pb-sm-4">
-        <h4 class="inner-text-title pt-5">Login</h4>
-        <ul class="breadcrumbs-custom-path">
-          <li><a th:href="@{/index}">Home</a></li>
-          <li class="active"><i class="fas fa-angle-right"></i>Login</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <!-- //inner banner -->
-  <div class="container h-100 py-md-5 py-4">
-    <div class="row justify-content-sm-center h-100">
-      <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-        <div class="card shadow-lg">
-          <div class="card-body p-5">
-            <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
-            <form th:action="@{/login}" method="POST" class="needs-validation" novalidate="" autocomplete="off">
-              <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
-                  th:text="${errorMessage}"
-              />
-              <li class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(logoutMessage)}"
-                  th:text="${logoutMessage}"
-              />
-              <div class="mb-3">
-                <label class="mb-2 text-muted" for="username">E-Mail Address</label>
-                <input id="username" type="username" class="form-control" name="username" value="" required autofocus>
-                <div class="invalid-feedback">
-                  Email is invalid
-                </div>
-              </div>
 
-              <div class="mb-3">
-                <div class="mb-2 w-100">
-                  <label class="text-muted" for="password">Password</label>
-                  <a href="forgot.html" class="float-end">
-                    Forgot Password?
-                  </a>
-                </div>
-                <input id="password" type="password" class="form-control" name="password" required>
-                <div class="invalid-feedback">
-                  Password is required
-                </div>
-              </div>
+<!-- header -->
+<div th:replace="header :: header">...</div>
+<!-- //header -->
 
-              <div class="d-flex align-items-center">
-                <div class="form-check">
-                  <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                  <label for="remember" class="form-check-label">Remember Me</label>
-                </div>
-                <button type="submit" class="btn main-btn ms-auto">
-                  Login
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="card-footer py-3 border-0">
-            <div class="text-center">
-              Don't have an account? <b><a th:href="@{/register}">Create One</a></b>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- inner banner -->
+<section class="inner-banner py-4">
+  <div class="w3l-breadcrumb py-lg-4">
+    <div class="container pt-4 pb-sm-4">
+      <h4 class="inner-text-title pt-5">Dashboard</h4>
+      <ul class="breadcrumbs-custom-path">
+        <li><a th:href="@{/index}">Home</a></li>
+        <li class="active"><i class="fas fa-angle-right"></i>Dashboard</li>
+      </ul>
     </div>
   </div>
 </section>
+<!-- //inner banner -->
 
-<script src="assets/js/login.js"></script>
+<!-- login block -->
+<section class="w3l-contact py-4" id="contact">
+  <div class="container py-md-4 py-4">
+    <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+      <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
+      <p class="" th:text="${'You logged in as - ' + roles}"></p>
+    </div>
+
+  </div>
+</section>
+<!-- //login block -->
+
+<!-- footer block -->
+<div th:replace="footer :: footer">...</div>
+<!-- //footer block -->
+
+<!-- Js scripts -->
+<!-- move top -->
 <button onclick="topFunction()" id="movetop" title="Go to top">
   <span class="fas fa-level-up-alt" aria-hidden="true"></span>
 </button>
@@ -118,10 +86,6 @@
 <!-- common jquery plugin -->
 <script src="assets/js/jquery-3.3.1.min.js"></script>
 <!-- //common jquery plugin -->
-
-<!-- /counter-->
-<script src="assets/js/counter.js"></script>
-<!-- //counter-->
 
 <!-- theme switch js (light and dark)-->
 <script src="assets/js/theme-change.js"></script>
@@ -171,4 +135,5 @@
 <!-- //bootstrap -->
 <!-- //Js scripts -->
 </body>
+
 </html>

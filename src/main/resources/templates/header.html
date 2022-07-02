@@ -35,6 +35,10 @@
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/about' ? 'active':''}"
                            class="nav-link" th:href="@{/about}">About Us</a>
                     </li>
+                    <li class="nav-item">
+                        <a th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}"
+                           class="nav-link" th:href="@{/logout}">Sign Out</a>
+                    </li>
                 </ul>
                 <ul>
                     <li>

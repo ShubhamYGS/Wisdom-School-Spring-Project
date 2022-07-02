@@ -21,13 +21,15 @@ public class LoginController {
                                    @RequestParam(value = "logout", required = false) String logout,
                                    Model model) {
         String errorMessage = null;
+        String logoutMessage = null;
         if(error != null) {
-            errorMessage = "Username or Password is incorrect";
+            errorMessage = "Email or Password is incorrect";
         }
         if(logout != null) {
-            errorMessage= "You have been successfully logged out!";
+            logoutMessage= "You have been successfully logged out!";
         }
         model.addAttribute("errorMessage",errorMessage);
+        model.addAttribute("logoutMessage",logoutMessage);
         return "login.html";
     }
 
