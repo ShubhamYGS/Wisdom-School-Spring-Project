@@ -43,6 +43,7 @@ public class ProjectSecurityConfig  {
                     .mvcMatchers("/","/index","/about","/login","/register","/contact").permitAll()
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
+                .csrf().ignoringAntMatchers("/saveMsg").and()
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form ->form
                     .loginPage("/login")

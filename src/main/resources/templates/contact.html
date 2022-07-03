@@ -51,7 +51,7 @@ Author URL: http://w3layouts.com
                             th:each="error: ${#fields.errors('contact.*')}" th:text="${error}">
                         </li>
                     </ul>
-                    <form th:action="@{/saveMsg}" method="post" class="signin-form" th:object="${contact}">
+                    <form action="/saveMsg" method="post" class="signin-form" th:object="${contact}">
                         <div class="input-grids">
                             <div class="row">
                                 <div class="col-sm-6">

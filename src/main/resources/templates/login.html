@@ -61,6 +61,7 @@
                     Forgot Password?
                   </a>
                 </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <input id="password" type="password" class="form-control" name="password" required>
                 <div class="invalid-feedback">
                   Password is required
