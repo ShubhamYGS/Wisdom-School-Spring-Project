@@ -40,10 +40,10 @@ public class ProjectSecurityConfig  {
         http
                 .authorizeHttpRequests( (auth)->auth
                     .mvcMatchers("/holidays","/courses","/dashboard").authenticated()
-                    .mvcMatchers("/","/index","/about","/login","/register","/contact").permitAll()
+                    .mvcMatchers("/","/index","/about","/login","/register","/contact","/h2-console/**").permitAll()
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
-                .csrf().ignoringAntMatchers("/saveMsg").and()
+                .csrf().ignoringAntMatchers("/saveMsg","/h2-console/**").and()
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form ->form
                     .loginPage("/login")
@@ -53,6 +53,7 @@ public class ProjectSecurityConfig  {
                         .invalidateHttpSession(true)
                         .permitAll());
 
+                http.headers().frameOptions().disable();
         return http.build();
 
         /**
