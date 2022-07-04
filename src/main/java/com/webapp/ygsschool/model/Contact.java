@@ -12,13 +12,17 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-public class Contact {
+public class Contact extends BaseFormEntity{
 
     /*
    * @NotNull: Checks if a given field is not null but allows empty values & zero elements inside collections.
      @NotEmpty: Checks if a given field is not null and its size/length is greater than zero.
      @NotBlank: Checks if a given field is not null and trimmed length is greater than zero.
    * */
+
+    private int contactId;
+
+    private String status;
 
     @NotBlank(message = "Name must not be blank")
     @Size(min = 3, message = "Name must be at least 3 characters long")
