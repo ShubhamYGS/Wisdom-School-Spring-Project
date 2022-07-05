@@ -41,6 +41,7 @@ public class ProjectSecurityConfig  {
                 .authorizeHttpRequests( (auth)->auth
                     .mvcMatchers("/holidays","/courses","/dashboard").authenticated()
                     .mvcMatchers("/","/index","/about","/login","/register","/contact","/h2-console/**").permitAll()
+                    .mvcMatchers("/displayMessages").hasRole("ADMIN")
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
                 .csrf().ignoringAntMatchers("/saveMsg","/h2-console/**").and()
