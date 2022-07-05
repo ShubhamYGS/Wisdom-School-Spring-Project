@@ -55,10 +55,10 @@
       </thead>
       <tbody>
       <tr th:each="msg: ${contactMsgs}">
-        <td th:text="${msg.name}"></td>
-        <td th:text="${msg.email}"></td>
-        <td th:text="${msg.subject}"></td>
-        <td th:text="${msg.message}"></td>
+        <td class="td-color" th:text="${msg.name}"></td>
+        <td class="td-color" th:text="${msg.email}"></td>
+        <td class="td-color" th:text="${msg.subject}"></td>
+        <td class="td-color" th:text="${msg.message}"></td>
         <td><a th:href="@{/closeMsg(id=${msg.contactId})}" class="btn main-btn">CLOSE</a></td>
       </tr>
       </tbody>
