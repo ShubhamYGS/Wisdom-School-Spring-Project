@@ -43,4 +43,12 @@ public class ContactService {
         List<Contact> contactMsgs = contactRepository.findMsgWithStatus(FormConstants.OPEN);
         return contactMsgs;
     }
+
+    public boolean updateMsgStatus(int id, String updatedBy) {
+        boolean isUpdated = false;
+        int result = contactRepository.updateMsgStatus(id,updatedBy,FormConstants.CLOSE);
+        if(result > 0)
+            isUpdated = true;
+        return isUpdated;
+    }
 }
