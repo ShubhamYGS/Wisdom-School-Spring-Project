@@ -40,11 +40,11 @@ public class ProjectSecurityConfig  {
         http
                 .authorizeHttpRequests( (auth)->auth
                     .mvcMatchers("/holidays","/courses","/dashboard").authenticated()
-                    .mvcMatchers("/","/index","/about","/login","/register","/contact","/h2-console/**").permitAll()
+                    .mvcMatchers("/","/index","/about","/login","/register","/contact").permitAll()
                     .mvcMatchers("/displayMessages").hasRole("ADMIN")
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
-                .csrf().ignoringAntMatchers("/saveMsg","/h2-console/**").and()
+                .csrf().ignoringAntMatchers("/saveMsg").and()
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form ->form
                     .loginPage("/login")
@@ -53,8 +53,6 @@ public class ProjectSecurityConfig  {
                         .logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true)
                         .permitAll());
-
-                http.headers().frameOptions().disable();
         return http.build();
 
         /**
