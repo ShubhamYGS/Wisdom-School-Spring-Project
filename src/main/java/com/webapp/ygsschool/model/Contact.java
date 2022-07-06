@@ -7,11 +7,14 @@ This makes our code short and clean.
 
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
+@Entity
+@Table(name = "contact_msg")
 public class Contact extends BaseFormEntity{
 
     /*
@@ -20,6 +23,13 @@ public class Contact extends BaseFormEntity{
      @NotBlank: Checks if a given field is not null and trimmed length is greater than zero.
    * */
 
+    /*
+    * @Table annotation is used when your Pojo class name and db table name is not same
+    * @Column annotation is used when your field name and table column name is not same (ignore '_')
+    * */
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int contactId;
 
     private String status;
