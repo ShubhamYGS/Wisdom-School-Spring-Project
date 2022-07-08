@@ -20,3 +20,66 @@ CREATE TABLE IF NOT EXISTS `HOLIDAYS` (
   `UPDATED_AT` TIMESTAMP DEFAULT NULL,
   `UPDATED_BY` VARCHAR(50) DEFAULT NULL
 );
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `role_id` int NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `created_by` varchar(50) NOT NULL,
+  `updated_at` TIMESTAMP DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`role_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `address` (
+  `address_id` int NOT NULL AUTO_INCREMENT,
+  `address1` varchar(200) NOT NULL,
+  `address2` varchar(200) DEFAULT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `zip_code` int NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `created_by` varchar(50) NOT NULL,
+  `updated_at` TIMESTAMP DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`address_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `person` (
+  `person_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `pwd` varchar(200) NOT NULL,
+  `role_id` int NOT NULL,
+  `address_id` int NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `created_by` varchar(50) NOT NULL,
+  `updated_at` TIMESTAMP DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`person_id`),
+   FOREIGN KEY (role_id) REFERENCES roles(role_id),
+   FOREIGN KEY (address_id) REFERENCES address(address_id)
+);
+
+CREATE TABLE IF NOT EXISTS `career` (
+  `job_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` varchar(300) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `zip_code` int NOT NULL,
+  `yourself` varchar(500),
+  `college` varchar(100) NOT NULL,
+  `degree` varchar(100) NOT NULL,
+  `cgpa` varchar(20) NOT NULL,
+  `job_title` varchar(100),
+  `company` varchar(100),
+  `working` varchar(10),
+  `pdf` BLOB,
+  `created_at` TIMESTAMP NOT NULL,
+  `created_by` varchar(50) NOT NULL,
+  `updated_at` TIMESTAMP DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`job_id`)
+};

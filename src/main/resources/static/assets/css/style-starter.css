@@ -4818,7 +4818,7 @@ fieldset:disabled .btn {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
-  background: var(--bg-color);
+  background: var(--card-bg-color);
 }
 
 .card>hr {
@@ -7787,6 +7787,11 @@ fieldset:disabled .btn {
 
 .mt-5 {
   margin-top: 3rem !important;
+}
+
+.mt-6 {
+    margin-top: 2.3rem !important;
+    padding-left: 40px;
 }
 
 .mt-auto {
@@ -11694,6 +11699,7 @@ fieldset:disabled .btn {
   --primary-color: #fbb034;
   --secondary-color: #00a4f5;
   --bg-color: #fff;
+  --card-bg-color: #fff;
   --heading-color: #060606;
   --font-color: #6f6f6f;
   --border-radius: 8px;
@@ -11716,6 +11722,7 @@ fieldset:disabled .btn {
   --primary-color: #fbb034;
   --secondary-color: #00a4f5;
   --bg-color: #08171e;
+  --card-bg-color: #081B33;
   --heading-color: #fdfffc;
   --font-color: #b7b7b7;
   --border-color-light: rgba(255, 255, 255, 0.2);
@@ -17592,8 +17599,8 @@ li {
   content: "\f508";
 }
 
-.fa-user-times:before {
-  content: "\f235";
+.fa-lights-holidays:before {
+  content: "\f2c5";
 }
 
 .fa-users:before {
@@ -21404,4 +21411,41 @@ label {
 
 .td-color {
     color: var(--heading-color);
+}
+.titleCareer {
+  border-bottom: 2px solid #ddd;
+  color: var(--heading-color);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 6.5px;
+  text-transform: capitalize;
+}
+.titleCareer > span {
+  border-bottom: 2px solid #26ae61;
+  padding-bottom: 10px;
+}
+.box{
+    position: static;
+    height: 45px;
+}
+#choose_file{
+    color:black;
+    background:white;
+    border:none;
+    outline:none;
+    box-shadow: 1px 1px 1px black;
+    border-radius:50px;
+}
+::-webkit-file-upload-button{
+    border:none;
+    background:#0000FF;
+    border-radius:50px;
+    height:45px;
+    color:white;
+    box-shadow: 1px 1px 1px grey;
+}
+.required:after {
+    content:"  *";
+    color: red;
 }

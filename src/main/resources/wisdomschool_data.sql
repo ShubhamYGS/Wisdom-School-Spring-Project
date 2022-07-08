@@ -36,3 +36,11 @@ INSERT INTO `HOLIDAYS` (`DAY`,`REASON`,`TYPE`,`CREATED_AT`, `CREATED_BY`)
 
 INSERT INTO `HOLIDAYS` (`DAY`,`REASON`,`TYPE`,`CREATED_AT`, `CREATED_BY`)
  VALUES (' Dec 25','Christmas','FESTIVAL',CURDATE(),'DBA');
+
+--Adding Two Roles (Admin & User)
+
+INSERT INTO `roles` (`role_name`,`created_at`, `created_by`)
+  VALUES ('ADMIN',CURDATE(),'DBA');
+
+INSERT INTO `roles` (`role_name`,`created_at`, `created_by`)
+  VALUES ('STUDENT',CURDATE(),'DBA');

@@ -51,7 +51,6 @@ Author URL: http://w3layouts.com
   </div>
 </section>
 <!-- //login block -->
-
 <div class="container">
   <div class="section__content section__content--p30">
     <div class="container-fluid">
@@ -66,6 +65,38 @@ Author URL: http://w3layouts.com
                   </div>
                   <div class="text">
                     <h2>Messages</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_USER')">
+          <a th:href="@{/career}">
+            <div class="overview-item overview-item--c3">
+              <div class="overview__inner">
+                <div class="overview-box clearfix text-center">
+                  <div class="icon">
+                    <i class="fas fa-user-tie"></i>
+                  </div>
+                  <div class="text">
+                    <h2>Career</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_USER')">
+          <a th:href="@{/holidays}">
+            <div class="overview-item overview-item--c1">
+              <div class="overview__inner">
+                <div class="overview-box clearfix text-center">
+                  <div class="icon">
+                    <i class="fas fa-smile-beam"></i>
+                  </div>
+                  <div class="text">
+                    <h2>Holidays</h2>
                   </div>
                 </div>
               </div>
