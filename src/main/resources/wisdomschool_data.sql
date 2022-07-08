@@ -44,3 +44,6 @@ INSERT INTO `roles` (`role_name`,`created_at`, `created_by`)
 
 INSERT INTO `roles` (`role_name`,`created_at`, `created_by`)
   VALUES ('STUDENT',CURDATE(),'DBA');
+
+--Add Admin Manually
+insert into person value (1, 'Admin', 'admin@gmail.com', 'admin', 1, null, curdate(), 'Shubham', curdate(), 'Shubham')

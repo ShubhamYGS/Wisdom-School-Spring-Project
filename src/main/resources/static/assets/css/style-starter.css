@@ -21412,6 +21412,9 @@ label {
 .td-color {
     color: var(--heading-color);
 }
+
+/* ----- Career Page ----- */
+
 .titleCareer {
   border-bottom: 2px solid #ddd;
   color: var(--heading-color);
