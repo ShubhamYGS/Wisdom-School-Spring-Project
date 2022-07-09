@@ -21,6 +21,12 @@ public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValu
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         Object fieldValue = new BeanWrapperImpl(o).getPropertyValue(field);
         Object fieldMatchValue = new BeanWrapperImpl(o).getPropertyValue(fieldMatch);
+
+        //All hashpassowrd starts with $2a as prefix (for ignore the same)
+        //First validation checks normal string and at the end mvc also checks after saving the hashed value into database
+        if(fieldValue.toString().startsWith("$2a"))
+            return true;
+
         return fieldValue.equals(fieldMatchValue);
     }
 }

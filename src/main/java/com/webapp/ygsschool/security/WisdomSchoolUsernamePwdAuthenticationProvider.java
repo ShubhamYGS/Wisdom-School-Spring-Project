@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class WisdomSchoolUsernamePwdAuthenticationProvider implements Authentica
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         //Taking email and password submitted by user
@@ -32,10 +36,12 @@ public class WisdomSchoolUsernamePwdAuthenticationProvider implements Authentica
         Person person = personRepository.findByEmail(email);
 
         //It will return null if no any person with provided mail id exists
-        if(person!=null && person.getPersonId()>0 && person.getPwd().equals(pwd)) {
+        //Also check if password provided by user is matching with password stored in db(Hash format)
+        if(person!=null && person.getPersonId()>0 && passwordEncoder.matches(pwd,person.getPwd())) {
             //We are passing person.getName() instead of email because we wanted to show username on dashboard page.
             return new UsernamePasswordAuthenticationToken(
-                    person.getName(), pwd, getGrantedAuthorities(person.getRoles()));
+                    //Instead of returning password return null (Spring also by default erases everything)
+                    person.getName(), null, getGrantedAuthorities(person.getRoles()));
         } else {
             throw new BadCredentialsException("Invalid Credentials!");
         }

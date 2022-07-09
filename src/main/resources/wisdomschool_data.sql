@@ -47,3 +47,5 @@ INSERT INTO `roles` (`role_name`,`created_at`, `created_by`)
 
 --Add Admin Manually
 insert into person value (1, 'Admin', 'admin@gmail.com', 'admin', 1, null, curdate(), 'Shubham', curdate(), 'Shubham')
+--Hashed Value of Password (Generated using BcryptPasswordEncoder)
+insert into person value (1, 'Admin', 'admin@gmail.com', '$2a$12$YRI8MSjVpyV6xRWpRJubSuj5U15Pv0T9UFo2VABtAzXRzkqW.7osa', 1, null, curdate(), 'Shubham', curdate(), 'Shubham')
