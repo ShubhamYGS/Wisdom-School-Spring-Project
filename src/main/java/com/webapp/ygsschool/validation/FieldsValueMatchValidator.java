@@ -23,9 +23,10 @@ public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValu
         Object fieldMatchValue = new BeanWrapperImpl(o).getPropertyValue(fieldMatch);
 
         //All hashpassowrd starts with $2a as prefix (for ignore the same)
-        //First validation checks normal string and at the end mvc also checks after saving the hashed value into database
-        if(fieldValue.toString().startsWith("$2a"))
-            return true;
+        //First validation checks normal string and at the end mvc jpa also checks after saving the hashed value into database
+        //We have disabled it in application.properties
+//        if(fieldValue.toString().startsWith("$2a"))
+//            return true;
 
         return fieldValue.equals(fieldMatchValue);
     }
