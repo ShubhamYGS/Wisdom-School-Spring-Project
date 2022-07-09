@@ -1,10 +1,5 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 
 <head>
   <!-- Required meta tags -->
@@ -16,117 +11,103 @@ Author URL: http://w3layouts.com
   <!-- Google fonts -->
   <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   <!-- Template CSS Style link -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style-starter.css">
 </head>
-
 <body>
-
 <!-- header -->
-<div th:replace="header :: header">...</div>
-<!-- //header -->
+<div id="header" th:replace="header :: header"></div>
+<!-- header -->
 
 <!-- inner banner -->
 <section class="inner-banner py-4">
   <div class="w3l-breadcrumb py-lg-4">
     <div class="container pt-4 pb-sm-4">
-      <h4 class="inner-text-title pt-5">Dashboard</h4>
+      <h4 class="inner-text-title pt-5">Edit your Profile</h4>
       <ul class="breadcrumbs-custom-path">
         <li><a th:href="@{/index}">Home</a></li>
-        <li class="active"><i class="fas fa-angle-right"></i>Dashboard</li>
+        <li class="active"><i class="fas fa-angle-right"></i>Profile</li>
       </ul>
     </div>
   </div>
 </section>
 <!-- //inner banner -->
 
-<!-- login block -->
-<section class="w3l-contact py-4" id="contact">
+<section class="w3l-team-13 py-4" id="career">
   <div class="container py-md-4 py-4">
-    <div class="title-main text-center mx-auto mb-md-5 mb-4">
-      <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
-      <p class="" th:text="${'You logged in as - ' + roles}"></p>
+    <div class="title-main text-center mx-auto mb-4">
+      <h3 class="title-style">My Profile</h3>
     </div>
-
   </div>
-</section>
-<!-- //login block -->
-<div class="container">
-  <div class="section__content section__content--p30">
-    <div class="container-fluid">
-      <div class="row m-t-25">
-        <div class="col-sm-6 col-lg-3">
-          <a th:href="@{/displayProfile}">
-            <div class="overview-item overview-item--c1">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-id-card"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Profile</h2>
-                  </div>
-                </div>
-              </div>
+
+  <div class="col-xxl-4 col-sm-9" style="margin: auto;">
+    <div class="card shadow-lg">
+      <div class="card-body p-5">
+        <ul>
+          <li class="alert alert-danger" role="alert"
+              th:each="error: ${#fields.errors('profile.*')}" th:text="${error}">
+          </li>
+        </ul>
+        <form th:action=@{/updateProfile}  method="POST" th:object="${profile}">
+          <div class="titleCareer">
+            <span>Personal Details</span>
+          </div>
+          <div class="mb-3">
+            <label class="mb-2 required">Name</label>
+            <input th:field="*{name}" type="text" class="form-control" required>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-sm">
+              <label class="mb-2 required">E-Mail Address</label>
+              <input th:field="*{email}" type="email" class="form-control" value="" required>
             </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
-          <a th:href="@{/displayMessages}">
-            <div class="overview-item overview-item--c2">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-envelope-open-text"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Messages</h2>
-                  </div>
-                </div>
-              </div>
+            <div class="col-sm">
+              <label class="mb-2 required">Mobile Number</label>
+              <input th:field="*{mobileNumber}" type="text" class="form-control" required>
             </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
-          <a th:href="@{/career}">
-            <div class="overview-item overview-item--c4">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-user-tie"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Career</h2>
-                  </div>
-                </div>
-              </div>
+          </div>
+
+          <div class="titleCareer">
+            <span>Address Details</span>
+          </div>
+
+          <div class="mb-3">
+            <label class="mb-2 required">Address</label>
+            <textarea th:field="*{address1}" class="form-control" rows="2" maxlength="300"></textarea>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-sm">
+              <label class="mb-2 required">City</label>
+              <input th:field="*{city}" type="text" class="form-control">
             </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
-          <a th:href="@{/holidays}">
-            <div class="overview-item overview-item--c1">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-smile-beam"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Holidays</h2>
-                  </div>
-                </div>
-              </div>
+            <div class="col-sm">
+              <label class="mb-2 required">State</label>
+              <input th:field="*{state}" type="text" class="form-control">
             </div>
-          </a>
-        </div>
+            <div class="col-sm">
+              <label class="mb-2 required">Zip Code</label>
+              <input th:field="*{zipCode}" type="text" class="form-control">
+            </div>
+          </div>
+
+          <br>
+          <div class="col-md-8 login-center text-start">
+            <button class="btn btn-style text-left" >Update</button>
+            <a th:href="@{/dashboard}" class="new-user text-right">
+              <button class="btn btn-style btn-style-3 text-left" th:formaction="@{/dashboard}">BACK</button></a>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
-</div>
-<!-- Messages block -->
+</section>
+<br>
+
 
 <!-- footer block -->
-<div th:replace="footer :: footer">...</div>
+<div th:replace="footer :: footer"></div>
 <!-- //footer block -->
 
 <!-- Js scripts -->
@@ -208,5 +189,4 @@ Author URL: http://w3layouts.com
 <!-- //bootstrap -->
 <!-- //Js scripts -->
 </body>
-
 </html>

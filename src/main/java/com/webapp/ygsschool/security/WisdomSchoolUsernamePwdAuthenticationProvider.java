@@ -38,10 +38,9 @@ public class WisdomSchoolUsernamePwdAuthenticationProvider implements Authentica
         //It will return null if no any person with provided mail id exists
         //Also check if password provided by user is matching with password stored in db(Hash format)
         if(person!=null && person.getPersonId()>0 && passwordEncoder.matches(pwd,person.getPwd())) {
-            //We are passing person.getName() instead of email because we wanted to show username on dashboard page.
             return new UsernamePasswordAuthenticationToken(
                     //Instead of returning password return null (Spring also by default erases everything)
-                    person.getName(), null, getGrantedAuthorities(person.getRoles()));
+                    email, null, getGrantedAuthorities(person.getRoles()));
         } else {
             throw new BadCredentialsException("Invalid Credentials!");
         }

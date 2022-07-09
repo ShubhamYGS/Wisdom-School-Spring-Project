@@ -31,13 +31,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
    PRIMARY KEY (`role_id`)
 );
 
+
 CREATE TABLE IF NOT EXISTS `address` (
   `address_id` int NOT NULL AUTO_INCREMENT,
+  `mobile_number` varchar(15) NOT NULL,
   `address1` varchar(200) NOT NULL,
-  `address2` varchar(200) DEFAULT NULL,
   `city` varchar(50) NOT NULL,
   `state` varchar(50) NOT NULL,
-  `zip_code` int NOT NULL,
+  `zip_code` varchar(10) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
   `created_by` varchar(50) NOT NULL,
   `updated_at` TIMESTAMP DEFAULT NULL,

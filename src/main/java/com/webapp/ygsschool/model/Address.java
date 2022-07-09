@@ -22,7 +22,9 @@ public class Address extends BaseFormEntity{
     @Size(min = 5, message = "Address1 must be at least 5 characters long")
     private String address1;
 
-    private String address2;
+    @NotBlank(message="Mobile number must not be blank")
+    @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be of 10 digits")
+    private String mobileNumber;
 
     @NotBlank(message = "City must not be blank")
     private String city;
@@ -32,5 +34,5 @@ public class Address extends BaseFormEntity{
 
     @NotBlank(message = "Zipcode must not be blank")
     @Pattern(regexp="(^$|[0-9]{6})",message = "Zip Code must be 6 digits")
-    private int zipcode;
+    private String zipCode;
 }
