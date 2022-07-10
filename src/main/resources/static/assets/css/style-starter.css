@@ -5983,7 +5983,7 @@ fieldset:disabled .btn {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: var(--card-bg-color);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
@@ -12696,7 +12696,7 @@ li {
 }
 
 .fa-book:before {
-  content: "\f02d";
+  content: "\f5db";
 }
 
 .fa-book-dead:before {
@@ -16409,6 +16409,10 @@ li {
 
 .fa-school:before {
   content: "\f549";
+}
+
+.fa-screen-users:before {
+    content: "\f63d";
 }
 
 .fa-screwdriver:before {
@@ -21409,6 +21413,11 @@ label {
   margin: 50px;
 }
 
+.table-responsive-class {
+  margin: auto;
+  width: 50% !important;
+}
+
 .td-color {
     color: var(--heading-color);
 }
@@ -21451,4 +21460,29 @@ label {
 .required:after {
     content:"  *";
     color: red;
+}
+
+/* ----- Classes Page ----- */
+
+.close:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.modal-header .close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+}
+
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #f00;
 }

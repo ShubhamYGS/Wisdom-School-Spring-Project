@@ -1,11 +1,10 @@
 package com.webapp.ygsschool.repository;
 
-import com.webapp.ygsschool.model.Person;
+import com.webapp.ygsschool.model.WisdomClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person,Integer> {
+public interface WisdomClassRepository extends JpaRepository<WisdomClass,Integer> {
 
-    Person findByEmail(String email);
 }

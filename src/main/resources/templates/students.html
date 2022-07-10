@@ -3,7 +3,6 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wisdom School</title>
@@ -26,36 +25,77 @@
 <section class="inner-banner py-4">
     <div class="w3l-breadcrumb py-lg-4">
         <div class="container pt-4 pb-sm-4">
-            <h4 class="inner-text-title pt-5">Oops...</h4>
+            <h4 class="inner-text-title pt-5">Students Details</h4>
             <ul class="breadcrumbs-custom-path">
-                <li><a th:href="@{/index}">Home</a></li>
-                <li class="active"><i class="fas fa-angle-right"></i>Error</li>
+                <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                <li><i class="fas fa-angle-right"></i><a th:href="@{/admin/displayClasses}">Classes</a></li>
+                <li class="active"><i class="fas fa-angle-right"></i>Students</li>
             </ul>
         </div>
     </div>
 </section>
 <!-- //inner banner -->
 
-<!-- error block -->
-<section class="page_404">
-    <div class="container">
-        <div class="row">
-                <div class=" col-sm-offset-1  text-center">
-                    <div class="four_zero_four_bg">
-                        <h1 class="text-center">oops!</h1>
-                    </div>
-                    <div class="contant_box_404">
-                        <h3 class="h2">
-                            Something went wrong. Please try again later.
-                        </h3>
-                        <p th:text="${'Error Message - ' + errormsg}"></p>
-                        <a th:href="@{/index}" class="link_404 btn btn-style btn-style-3">Go to Home</a>
-                    </div>
-                </div>
+<div class="site-section">
+
+    <div class="table-responsive-class">
+
+        <div class="row mb-4">
+            <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+                th:text="${errorMessage}" />
+            <div class="overview-wrap">
+                <h3 class="heading-21921" th:text="${wisdomClass.name} + ' Students Details'"></h3>
+                <button class="btn main-btn" type="button"
+                        data-bs-toggle="modal" data-bs-target="#addStudent">ADD STUDENT</button>
+            </div>
         </div>
+        <div class="modal fade login-block" id="addStudent" tabindex="-1" role="dialog"
+             aria-labelledby="addStudentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:action="@{/admin/addStudent}" method="post" class="signin-form" th:object="${person}">
+                        <div class="modal-body">
+                            <div class="modal-body">
+                                <label class="mb-2 required">Student Email</label>
+                                <input type="email" class="form-control" th:field="*{email}" required  placeHolder="Enter Student Email">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-style btn-style-3">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover" style="text-align:center">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person: ${wisdomClass.persons}">
+                <td class="td-color" th:text="${person.name}"></td>
+                <td class="td-color" th:text="${person.email}"></td>
+                <td><a th:href="@{/admin/deleteStudent(personId=${person.personId})}" class="btn btn-danger">DELETE</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</section>
-<!-- //error block -->
+    <div class="col-md-2 login-center text-start">
+        <a th:href="@{/admin/displayClasses}">
+            <button class="btn btn-style btn-style-3 text-left">BACK</button>
+        </a>
+    </div>
+</div>
 
 <!-- footer block -->
 <div th:replace="footer :: footer">...</div>
