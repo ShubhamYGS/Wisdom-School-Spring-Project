@@ -61,9 +61,10 @@ public class ProfileController {
         person.getAddress().setCity(profile.getCity());
         person.getAddress().setZipCode(profile.getZipCode());
 
-        personRepository.save(person);
-        httpSession.setAttribute("loggedInPerson",person);
+        //Copying the saved person object and passing it httpSession. So that profile will be updated with new details.
+        Person savedPerson = personRepository.save(person);
+        httpSession.setAttribute("loggedInPerson",savedPerson);
 
-        return "redirect:/dashboard";
+        return "redirect:/displayProfile";
     }
 }
