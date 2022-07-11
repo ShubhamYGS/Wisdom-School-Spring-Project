@@ -2017,7 +2017,17 @@ progress {
   margin-bottom: 1rem;
   color: #212529;
   vertical-align: top;
-  border-color: #dee2e6;
+  --border-color: #dee2e6;
+  border: 1px solid var(--border-color);
+  border-spacing: 0;
+}
+
+.table th, .table td {
+    padding: .2rem;
+    box-shadow: -1px -1px var(--border-color);
+}
+.table th {
+    background: hsl(240deg, 100%, 80%);
 }
 
 .table> :not(caption)>*>* {
@@ -21137,8 +21147,8 @@ h4.inner-text-title {
 }
 
 .login-center {
-    float: none;
-    margin: auto;
+    display: flex;
+      justify-content: center;
 }
 
 .log-details p a:hover {

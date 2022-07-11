@@ -1,7 +1,9 @@
 package com.webapp.ygsschool.controller;
 
+import com.webapp.ygsschool.model.Courses;
 import com.webapp.ygsschool.model.Person;
 import com.webapp.ygsschool.model.WisdomClass;
+import com.webapp.ygsschool.repository.CoursesRepository;
 import com.webapp.ygsschool.repository.PersonRepository;
 import com.webapp.ygsschool.repository.WisdomClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private CoursesRepository coursesRepository;
 
     @RequestMapping("/displayClasses")
     public ModelAndView displayClasses(Model model) {
@@ -108,6 +113,23 @@ public class AdminController {
         WisdomClass wisdomClassSaved = wisdomClassRepository.save(wisdomClass);
         httpSession.setAttribute("wisdomClass",wisdomClassSaved);
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayStudents?classId="+wisdomClass.getClassId());
+        return modelAndView;
+    }
+
+    @RequestMapping("/displayCourses")
+    public ModelAndView displayCourses(Model model) {
+        List<Courses> coursesList = coursesRepository.findAll();
+        ModelAndView modelAndView = new ModelAndView("addcourses.html");
+        modelAndView.addObject("course",new Courses());
+        modelAndView.addObject("courses",coursesList);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/addNewCourse")
+    public ModelAndView addNewCourse(Model model,   @ModelAttribute("course") Courses course) {
+        ModelAndView modelAndView = new ModelAndView();
+        coursesRepository.save(course);
+        modelAndView.setViewName("redirect:/admin/displayCourses");
         return modelAndView;
     }
 }

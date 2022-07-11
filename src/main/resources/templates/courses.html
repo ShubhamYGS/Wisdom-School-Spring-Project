@@ -19,218 +19,193 @@ Author URL: http://w3layouts.com
 </head>
 
 <body>
-    <!-- header -->
-    <div id="header" th:replace="header :: header"></div>
-    <!-- //header -->
+<!-- header -->
+<div id="header" th:replace="header :: header"></div>
+<!-- //header -->
 
-    <!-- inner banner -->
-    <section class="inner-banner py-4">
-        <div class="w3l-breadcrumb py-lg-4">
-            <div class="container pt-4 pb-sm-4">
-                <h4 class="inner-text-title pt-5">Courses</h4>
-                <ul class="breadcrumbs-custom-path">
-                    <li><a th:href="@{/index}">Home</a></li>
-                    <li class="active"><i class="fas fa-angle-right"></i>Courses</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- //inner banner -->
-
-    <!-- courses section -->
-    <div class="w3l-grids-block-5 py-4">
-        <div class="container py-md-4 py-4">
-            <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
-                <p class="text-uppercase">Best Courses</p>
-                <h3 class="title-style">Find The Right Course For You</h3>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6">
-                    <div class="coursecard-single">
-                        <div class="grids5-info position-relative">
-                            <img src="assets/images/c1.jpg" alt="" class="img-fluid" />
-                            <div class="meta-list">
-                                <a th:href="@{/courses}">Art & Design</a>
-                            </div>
-                        </div>
-                        <div class="content-main-top">
-                            <div class="content-top mb-4 mt-3">
-                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-book-open"></i> 43 Lesson</li>
-                                    <li> <i class="fas fa-star"></i> 4.5</li>
-                                </ul>
-                            </div>
-                            <h4><a th:href="@{/courses}">Educational Programs</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                <h6>$42.00</h6>
-                                <a class="btn btn-style-primary" th:href="@{/courses}">Know Details<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
-                    <div class="coursecard-single">
-                        <div class="grids5-info position-relative">
-                            <img src="assets/images/c2.jpg" alt="" class="img-fluid" />
-                            <div class="meta-list">
-                                <a th:href="@{/courses}" class="sec-2">Meditation</a>
-                            </div>
-                        </div>
-                        <div class="content-main-top">
-                            <div class="content-top mb-4 mt-3">
-                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-book-open"></i> 72 Lesson</li>
-                                    <li> <i class="fas fa-star"></i> 4.3</li>
-                                </ul>
-                            </div>
-                            <h4><a th:href="@{/courses}">Best Meditation Classes</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                <h6>$36.00</h6>
-                                <a class="btn btn-style-primary" th:href="@{/courses}">Know Details<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
-                    <div class="coursecard-single">
-                        <div class="grids5-info position-relative">
-                            <img src="assets/images/c3.jpg" alt="" class="img-fluid" />
-                            <div class="meta-list">
-                                <a th:href="@{/courses}" class="sec-3">Games</a>
-                            </div>
-                        </div>
-                        <div class="content-main-top">
-                            <div class="content-top mb-4 mt-3">
-                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-book-open"></i> 14 Lesson</li>
-                                    <li> <i class="fas fa-star"></i> 4.2</li>
-                                </ul>
-                            </div>
-                            <h4><a th:href="@{/courses}">Games Program in a Week</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                <h6>$30.00</h6>
-                                <a class="btn btn-style-primary" th:href="@{/courses}">Know Details<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-4">
-                    <div class="coursecard-single">
-                        <div class="grids5-info position-relative">
-                            <img src="assets/images/c4.jpg" alt="" class="img-fluid" />
-                            <div class="meta-list">
-                                <a th:href="@{/courses}">Development</a>
-                            </div>
-                        </div>
-                        <div class="content-main-top">
-                            <div class="content-top mb-4 mt-3">
-                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-book-open"></i> 23 Lesson</li>
-                                    <li> <i class="fas fa-star"></i> 5.0</li>
-                                </ul>
-                            </div>
-                            <h4><a th:href="@{/courses}">Games Program</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                <h6>$32.00</h6>
-                                <a class="btn btn-style-primary" th:href="@{/courses}">Know Details<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-4">
-                    <div class="coursecard-single">
-                        <div class="grids5-info position-relative">
-                            <img src="assets/images/c5.jpg" alt="" class="img-fluid" />
-                            <div class="meta-list">
-                                <a th:href="@{/courses}" class="sec-2">Audio & Music</a>
-                            </div>
-                        </div>
-                        <div class="content-main-top">
-                            <div class="content-top mb-4 mt-3">
-                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-book-open"></i> 40 Lesson</li>
-                                    <li> <i class="fas fa-star"></i> 4.6</li>
-                                </ul>
-                            </div>
-                            <h4><a th:href="@{/courses}">Best Music Classes</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                <h6>$42.00</h6>
-                                <a class="btn btn-style-primary" th:href="@{/courses}">Know Details<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-4">
-                    <div class="coursecard-single">
-                        <div class="grids5-info position-relative">
-                            <img src="assets/images/c6.jpg" alt="" class="img-fluid" />
-                            <div class="meta-list">
-                                <a th:href="@{/courses}" class="sec-3">Ui/Ux Design</a>
-                            </div>
-                        </div>
-                        <div class="content-main-top">
-                            <div class="content-top mb-4 mt-3">
-                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-book-open"></i> 20 Lesson</li>
-                                    <li> <i class="fas fa-star"></i> 4.8</li>
-                                </ul>
-                            </div>
-                            <h4><a th:href="@{/courses}">Labs Programs</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
-                                <h6>$60.00</h6>
-                                <a class="btn btn-style-primary" th:href="@{/courses}">Know Details<i
-                                        class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- pagination -->
-            <div class="pagination-style text-center mt-5">
-                <ul>
-                    <li> <a href="#none" class="not-allowed" disabled="">
-                            <span class="fa fa-angle-double-left" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    <li><a class="active" href="#page">1</a></li>
-                    <li>
-                        <a href="#page">2</a>
-                    </li>
-                    <li>
-                        <a href="#page">3</a>
-                    </li>
-                    <li>
-                        <a href="#page"><span class="fa fa-angle-double-right" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- //pagination -->
+<!-- inner banner -->
+<section class="inner-banner py-4">
+    <div class="w3l-breadcrumb py-lg-4">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title pt-5">Courses</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a th:href="@{/index}">Home</a></li>
+                <li class="active"><i class="fas fa-angle-right"></i>Courses</li>
+            </ul>
         </div>
     </div>
-    <!-- //courses section -->
+</section>
+<!-- //inner banner -->
 
-    <!-- footer block -->
-    <div th:replace="footer :: footer"></div>
-    <!-- //footer block -->
+<!-- courses section -->
+<div class="w3l-grids-block-5 py-4">
+    <div class="container py-md-4 py-4">
+        <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+            <p class="text-uppercase">Best Courses</p>
+            <h3 class="title-style">Find The Right Course For You</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="coursecard-single">
+                    <div class="grids5-info position-relative">
+                        <img src="assets/images/c1.jpg" alt="" class="img-fluid" />
+                        <div class="meta-list">
+                            <a>Education</a>
+                        </div>
+                    </div>
+                    <div class="content-main-top">
+                        <div class="content-top mb-4 mt-3">
+                            <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                <li> <i class="fas fa-book-open"></i> 43 Lesson</li>
+                                <li> <i class="fas fa-star"></i> 4.9</li>
+                            </ul>
+                        </div>
+                        <h4><a>Educational Programs</a></h4>
+                        <p>Educations programmes covering core concepts of Maths,
+                            English, Science.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+                <div class="coursecard-single">
+                    <div class="grids5-info position-relative">
+                        <img src="assets/images/c2.jpg" alt="" class="img-fluid" />
+                        <div class="meta-list">
+                            <a class="sec-2">Meditation</a>
+                        </div>
+                    </div>
+                    <div class="content-main-top">
+                        <div class="content-top mb-4 mt-3">
+                            <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                <li> <i class="fas fa-book-open"></i> 72 Lesson</li>
+                                <li> <i class="fas fa-star"></i> 4.6</li>
+                            </ul>
+                        </div>
+                        <h4><a>Best Meditation Classes</a></h4>
+                        <p>Special program focusing the meditation to encourage students
+                            from early age.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
+                <div class="coursecard-single">
+                    <div class="grids5-info position-relative">
+                        <img src="assets/images/c3.jpg" alt="" class="img-fluid" />
+                        <div class="meta-list">
+                            <a class="sec-3">Games</a>
+                        </div>
+                    </div>
+                    <div class="content-main-top">
+                        <div class="content-top mb-4 mt-3">
+                            <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                <li> <i class="fas fa-book-open"></i> 14 Lesson</li>
+                                <li> <i class="fas fa-star"></i> 5.0</li>
+                            </ul>
+                        </div>
+                        <h4><a>Games Program in a Week</a></h4>
+                        <p> Games program encouraging the children on the physical
+                            activities.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4">
+                <div class="coursecard-single">
+                    <div class="grids5-info position-relative">
+                        <img src="assets/images/c4.jpg" alt="" class="img-fluid" />
+                        <div class="meta-list">
+                            <a href="courses.html">Development</a>
+                        </div>
+                    </div>
+                    <div class="content-main-top">
+                        <div class="content-top mb-4 mt-3">
+                            <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                <li> <i class="fas fa-book-open"></i> 23 Lesson</li>
+                                <li> <i class="fas fa-star"></i> 5.0</li>
+                            </ul>
+                        </div>
+                        <h4><a>Development Programs</a></h4>
+                        <p>Special development courses for special needs children to improve their confidence.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4">
+                <div class="coursecard-single">
+                    <div class="grids5-info position-relative">
+                        <img src="assets/images/c5.jpg" alt="" class="img-fluid" />
+                        <div class="meta-list">
+                            <a class="sec-2">Audio & Music</a>
+                        </div>
+                    </div>
+                    <div class="content-main-top">
+                        <div class="content-top mb-4 mt-3">
+                            <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                <li> <i class="fas fa-book-open"></i> 40 Lesson</li>
+                                <li> <i class="fas fa-star"></i> 4.6</li>
+                            </ul>
+                        </div>
+                        <h4><a href="courses.html">Best Music Classes</a></h4>
+                        <p>Music dedicated programmes for the music interested students.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4">
+                <div class="coursecard-single">
+                    <div class="grids5-info position-relative">
+                        <img src="assets/images/c6.jpg" alt="" class="img-fluid" />
+                        <div class="meta-list">
+                            <a class="sec-3">Art & Design</a>
+                        </div>
+                    </div>
+                    <div class="content-main-top">
+                        <div class="content-top mb-4 mt-3">
+                            <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                <li> <i class="fas fa-book-open"></i> 20 Lesson</li>
+                                <li> <i class="fas fa-star"></i> 4.8</li>
+                            </ul>
+                        </div>
+                        <h4><a>Painting Programs</a></h4>
+                        <p>Art & Design programmes for the children to improve their drawing skills.</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+        <!-- pagination -->
+        <div class="pagination-style text-center mt-5">
+            <ul>
+                <li> <a href="#none" class="not-allowed" disabled="">
+                    <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+                </a>
+                </li>
+                <li><a class="active" href="#page">1</a></li>
+                <li>
+                    <a href="#page">2</a>
+                </li>
+                <li>
+                    <a href="#page">3</a>
+                </li>
+                <li>
+                    <a href="#page"><span class="fa fa-angle-double-right" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- //pagination -->
+    </div>
+</div>
+<!-- //courses section -->
 
-    <!-- Js scripts -->
-    <!-- move top -->
-    <button onclick="topFunction()" id="movetop" title="Go to top">
-        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
-    </button>
-    <script>
+<!-- footer block -->
+<div th:replace="footer :: footer"></div>
+<!-- //footer block -->
+
+<!-- Js scripts -->
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" title="Go to top">
+    <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+</button>
+<script>
         // When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function () {
             scrollFunction()
@@ -250,18 +225,18 @@ Author URL: http://w3layouts.com
             document.documentElement.scrollTop = 0;
         }
     </script>
-    <!-- //move top -->
+<!-- //move top -->
 
-    <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <!-- //common jquery plugin -->
+<!-- common jquery plugin -->
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<!-- //common jquery plugin -->
 
-    <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
-    <!-- //theme switch js (light and dark)-->
+<!-- theme switch js (light and dark)-->
+<script src="assets/js/theme-change.js"></script>
+<!-- //theme switch js (light and dark)-->
 
-    <!-- MENU-JS -->
-    <script>
+<!-- MENU-JS -->
+<script>
         $(window).on("scroll", function () {
             var scroll = $(window).scrollTop();
 
@@ -287,22 +262,22 @@ Author URL: http://w3layouts.com
             });
         });
     </script>
-    <!-- //MENU-JS -->
+<!-- //MENU-JS -->
 
-    <!-- disable body scroll which navbar is in active -->
-    <script>
+<!-- disable body scroll which navbar is in active -->
+<script>
         $(function () {
             $('.navbar-toggler').click(function () {
                 $('body').toggleClass('noscroll');
             })
         });
     </script>
-    <!-- //disable body scroll which navbar is in active -->
+<!-- //disable body scroll which navbar is in active -->
 
-    <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- //bootstrap -->
-    <!-- //Js scripts -->
+<!-- bootstrap -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- //bootstrap -->
+<!-- //Js scripts -->
 </body>
 
 </html>
