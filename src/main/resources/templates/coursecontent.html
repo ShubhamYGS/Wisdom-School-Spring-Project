@@ -6,17 +6,19 @@
 <body>
 <coursecontent>
     <!-- courses section -->
-
-
     <div class="w3l-grids-block-5 py-4">
         <div class="container py-md-4 py-4">
+            <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+                <p class="text-uppercase">Best Courses</p>
+                <h3 class="title-style">Find The Right Course For You</h3>
+            </div>
             <div class="row justify-content-center">
                 <table>
                     <tr th:each="course: ${courses}">
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-4 col-md-6 mt-4">
                             <div class="coursecard-single">
                                 <div class="grids5-info position-relative">
-                                    <img src="/assets/images/c1.jpg" alt="" class="img-fluid" />
+                                    <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid" />
                                     <div class="meta-list">
                                         <a th:text="${course.tags}"></a>
                                     </div>
@@ -30,9 +32,9 @@
                                     </div>
                                     <h4 th:text="${course.name}"></h4>
                                     <p th:text="${course.descrip}"></p>
-                                    <div class="top-content-border d-flex align-items-center justify-content-between mt-4 pt-4">
+                                    <div class="top-content-border d-flex align-items-center justify-content-between mt-3 pt-3">
                                         <h6 th:text="${course.fees}"></h6>
-                                        <a class="btn btn-style-primary" th:href="@{/enrollCourse}">Enroll now<i
+                                        <a class="btn btn-style-primary" th:href="@{/student/enrollStudent(courseId=${course.courseId})}">Enroll now<i
                                                 class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>

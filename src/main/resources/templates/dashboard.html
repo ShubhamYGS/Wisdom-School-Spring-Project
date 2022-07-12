@@ -135,6 +135,22 @@ Author URL: http://w3layouts.com
             </div>
           </a>
         </div>
+        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
+          <a th:href="@{/student/displayCourses}">
+            <div class="overview-item overview-item--c4">
+              <div class="overview__inner">
+                <div class="overview-box clearfix text-center">
+                  <div class="icon">
+                    <i class="fas fa-book-reader"></i>
+                  </div>
+                  <div class="text">
+                    <h2>My Courses</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
         <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
           <a th:href="@{/admin/displayCourses}">
             <div class="overview-item overview-item--c4">

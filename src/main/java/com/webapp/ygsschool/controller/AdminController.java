@@ -6,13 +6,17 @@ import com.webapp.ygsschool.model.WisdomClass;
 import com.webapp.ygsschool.repository.CoursesRepository;
 import com.webapp.ygsschool.repository.PersonRepository;
 import com.webapp.ygsschool.repository.WisdomClassRepository;
+import com.webapp.ygsschool.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +32,9 @@ public class AdminController {
 
     @Autowired
     private CoursesRepository coursesRepository;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     @RequestMapping("/displayClasses")
     public ModelAndView displayClasses(Model model) {
@@ -122,14 +129,37 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("addcourses.html");
         modelAndView.addObject("course",new Courses());
         modelAndView.addObject("courses",coursesList);
+        modelAndView.addObject("person",new Person());
         return modelAndView;
     }
 
     @PostMapping(value = "/addNewCourse")
-    public ModelAndView addNewCourse(Model model,   @ModelAttribute("course") Courses course) {
+    public ModelAndView addNewCourse(Model model, @ModelAttribute("course") Courses course,
+                                     @RequestParam("file")MultipartFile multipartFile) {
         ModelAndView modelAndView = new ModelAndView();
-        coursesRepository.save(course);
         modelAndView.setViewName("redirect:/admin/displayCourses");
+
+        //Check if file is empty
+        if(multipartFile.isEmpty()) {
+            System.out.println("Course Image file cannot be empty");
+            return modelAndView;
+        }
+        //Upload File
+        if (!(fileUploadService.uploadFile(multipartFile))) {
+            System.out.println("Error while upload file. Try again!");
+            return modelAndView;
+        }
+        course.setCourseImage(multipartFile.getOriginalFilename());
+        coursesRepository.save(course);
         return modelAndView;
+    }
+
+    @GetMapping(value = "/enrolledStudents")
+    public void showEnrolledStudents(@RequestParam("courseId") int courseId) {
+        List<Person> personList = new ArrayList<>();
+        ModelAndView modelAndView = new ModelAndView("addcourses.html");
+        Optional<Courses> courses = coursesRepository.findById(courseId);
+        modelAndView.addObject("courses",courses.get());
+        modelAndView.addObject("personList",personList);
     }
 }

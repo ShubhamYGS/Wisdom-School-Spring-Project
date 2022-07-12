@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `lesson_no` varchar(10) NOT NULL,
   `rating` varchar(10) NOT NULL,
   `fees` varchar(10) NOT NULL,
+  `courseimage` varchar(50) DEFAULT NULL,
   `created_at` TIMESTAMP NOT NULL,
   `created_by` varchar(50) NOT NULL,
   `updated_at` TIMESTAMP DEFAULT NULL,

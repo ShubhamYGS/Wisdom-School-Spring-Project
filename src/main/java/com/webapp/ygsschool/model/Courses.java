@@ -28,6 +28,8 @@ public class Courses extends BaseFormEntity{
 
     private String fees;
 
+    private String courseImage;
+
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Person> persons = new HashSet<>();
 }
