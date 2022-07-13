@@ -38,7 +38,96 @@ Author URL: http://w3layouts.com
 <!-- //inner banner -->
 
 <!-- courses section -->
-<div th:replace="coursecontent :: coursecontent"></div>
+<!-- courses section -->
+<div class="w3l-grids-block-5 py-4">
+    <div class="container py-md-4 py-4">
+        <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+            <p class="text-uppercase">Best Courses</p>
+            <h3 class="title-style">Find The Right Course For You</h3>
+        </div>
+
+        <div class="row justify-content-center">
+            <table>
+                <tr th:if="${#httpServletRequest.getRequestURI() == '/student/displayCourses'}" th:each="course: ${person.courses}">
+                    <div class="col-lg-4 col-md-6 mt-4">
+                        <div class="coursecard-single">
+                            <div class="grids5-info position-relative">
+                                <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid" />
+                                <div class="meta-list">-
+                                    <a th:text="${course.tags}"></a>
+                                </div>
+                            </div>
+                            <div class="content-main-top">
+                                <div class="content-top mb-4 mt-3">
+                                    <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                        <li> <i class="fas fa-book-open" th:text="${course.lessonNo}"></i></li>
+                                        <li> <i class="fas fa-star" th:text="${course.rating}"></i></li>
+                                    </ul>
+                                </div>
+                                <h4 th:text="${course.name}"></h4>
+                                <p th:text="${course.descrip}"></p>
+                                <div class="top-content-border d-flex align-items-center justify-content-center mt-3 pt-3">
+                                    <a class="btn btn-style-primary" th:href="@{/student/unEnrollStudent(courseId=${course.courseId})}">Unenroll from course<i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                <tr th:if="${#httpServletRequest.getRequestURI() == '/student/courses'}" th:each="course: ${courses}">
+                    <div class="col-lg-4 col-md-6 mt-4">
+                        <div class="coursecard-single">
+                            <div class="grids5-info position-relative">
+                                <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid" />
+                                <div class="meta-list">
+                                    <a th:text="${course.tags}"></a>
+                                </div>
+                            </div>
+                            <div class="content-main-top">
+                                <div class="content-top mb-4 mt-3">
+                                    <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                        <li> <i class="fas fa-book-open" th:text="${course.lessonNo}"></i></li>
+                                        <li> <i class="fas fa-star" th:text="${course.rating}"></i></li>
+                                    </ul>
+                                </div>
+                                <h4 th:text="${course.name}"></h4>
+                                <p th:text="${course.descrip}"></p>
+                                <div class="top-content-border d-flex align-items-center justify-content-between mt-3 pt-3">
+                                    <h6 th:text="${course.fees}"></h6>
+                                    <a class="btn btn-style-primary" th:href="@{/student/enrollStudent(courseId=${course.courseId})}">Enroll now<i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="pagination-style text-center mt-5">
+            <ul>
+                <li> <a href="#none" class="not-allowed" disabled="">
+                    <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+                </a>
+                </li>
+                <li><a class="active" href="#page">1</a></li>
+                <li>
+                    <a href="#page">2</a>
+                </li>
+                <li>
+                    <a href="#page">3</a>
+                </li>
+                <li>
+                    <a href="#page"><span class="fa fa-angle-double-right" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- //pagination -->
+    </div>
+</div>
+<!-- //courses section -->
 <!-- //courses section -->
 
 <!-- footer block -->
@@ -118,6 +207,12 @@ Author URL: http://w3layouts.com
         });
     </script>
 <!-- //disable body scroll which navbar is in active -->
+
+<!-- Change color everytime course tab refreshes -->
+    <script>
+        const randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        document.documentElement.style.setProperty('--tag-bg-color', randomColor);
+    </script>
 
 <!-- bootstrap -->
 <script src="/assets/js/bootstrap.min.js"></script>

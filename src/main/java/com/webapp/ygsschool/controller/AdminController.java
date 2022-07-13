@@ -10,13 +10,11 @@ import com.webapp.ygsschool.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -155,11 +153,9 @@ public class AdminController {
     }
 
     @GetMapping(value = "/enrolledStudents")
-    public void showEnrolledStudents(@RequestParam("courseId") int courseId) {
-        List<Person> personList = new ArrayList<>();
+    public void showEnrolledStudents(Model model, @RequestParam("courseId") int courseId) {
         ModelAndView modelAndView = new ModelAndView("addcourses.html");
-        Optional<Courses> courses = coursesRepository.findById(courseId);
-        modelAndView.addObject("courses",courses.get());
-        modelAndView.addObject("personList",personList);
+        Optional<Courses> courseList = coursesRepository.findById(courseId);
+        modelAndView.addObject("courseList",courseList.get());
     }
 }

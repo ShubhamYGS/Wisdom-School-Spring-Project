@@ -34,9 +34,10 @@
     <!-- //inner banner -->
     <div class="site-section">
         <div style="text-align:center">
-                <h3 class="heading-21921 text-center" >WisdomSchool Class Details</h3>
-                <button class="btn main-btn" type="button"
-                        data-bs-toggle="modal" data-bs-target="#addCourse">ADD COURSE</button>
+                <h3 class="text-uppercase mb-4" style="font-family:Sans-Serif;">Do you want to add New Course for your students ?</h3>
+                <button class="btn btn-style" type="button"
+                            data-bs-toggle="modal" data-bs-target="#addCourse">ADD NEW COURSE</button>
+            </div>
         </div>
 
         <div class="modal fade login-block" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseModalLabel" aria-hidden="true">
@@ -91,7 +92,7 @@
         </div>
     </div>
 
-    <div th:object=${person} class="modal fade login-block" id="enrollStud" tabindex="-1" role="dialog" aria-labelledby="enrollStudModalLabel" aria-hidden="true">
+    <div class="modal fade login-block" id="enrollStud" tabindex="-1" role="dialog" aria-labelledby="enrollStudModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -109,23 +110,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="person: ${personList}">
-                        <td class="td-color" th:text="${person.name}"></td>
-                        <td class="td-color" th:text="${person.email}"></td>
+                    <tr th:each="perso: ${courseList}">
+                        <td class="td-color" th:text="${perso.name}"></td>
+                        <td class="td-color" th:text="${perso.email}"></td>
                     </tr>
                     </tbody>
                 </table>
-
-                <div class="modal-footer border-top-0 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-style btn-style-3">Submit</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
-    </div>
-    <div class="w3l-grids-block-5 py-4">
-        <div class="container py-md-4 py-4">
+    <div class="w3l-grids-block-5">
+        <div class="container">
             <div class="row justify-content-center">
                 <table>
                     <tr th:each="course: ${courses}">
@@ -259,6 +254,12 @@
         });
     </script>
     <!-- //disable body scroll which navbar is in active -->
+
+    <!-- Change color everytime course tab refreshes -->
+    <script>
+        const randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        document.documentElement.style.setProperty('--tag-bg-color', randomColor);
+    </script>
 
     <!-- bootstrap -->
     <script src="/assets/js/bootstrap.min.js"></script>

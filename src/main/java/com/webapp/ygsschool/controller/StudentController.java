@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -25,16 +24,18 @@ public class StudentController {
     private PersonRepository personRepository;
 
     @GetMapping(value = "/courses")
-    public ModelAndView showCoursesPage(Model model){
+    public ModelAndView showCoursesPage(Model model, Authentication authentication){
         List<Courses> coursesList = coursesRepository.findAll();
+        Person personEntity = personRepository.findByEmail(authentication.getName());
         ModelAndView modelAndView = new ModelAndView("courses.html");
+        modelAndView.addObject("person",personEntity);
         modelAndView.addObject("course",new Courses());
         modelAndView.addObject("courses",coursesList);
         return modelAndView;
     }
 
     @RequestMapping(value = "/enrollStudent", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView modelAndView(Model model, @RequestParam("courseId") int courseId, Authentication authentication) {
+    public ModelAndView enrollStudent(Model model, @RequestParam("courseId") int courseId, Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<Courses> courses = coursesRepository.findById(courseId);
         Person personEntity = personRepository.findByEmail(authentication.getName());
@@ -45,11 +46,23 @@ public class StudentController {
         return modelAndView;
     }
 
-//    @GetMapping("/displayCourses")
-//    public ModelAndView modelAndView(Authentication authentication) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        Person personEntity = personRepository.findByEmail(authentication.getName());
-//        Courses courses = new Courses();
-//        courses.getPersons(personEntity).;
-//    }
+    @RequestMapping(value = "/unEnrollStudent", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView unEnrollStudent(Model model, @RequestParam("courseId") int courseId, Authentication authentication) {
+        ModelAndView modelAndView = new ModelAndView();
+        Person personEntity = personRepository.findByEmail(authentication.getName());
+        Optional<Courses> courses = coursesRepository.findById(courseId);
+        personEntity.getCourses().remove(courses.get());
+        courses.get().getPersons().remove(personEntity);
+        personRepository.save(personEntity);
+        modelAndView.setViewName("redirect:/student/displayCourses");
+        return modelAndView;
+    }
+
+    @GetMapping("/displayCourses")
+    public ModelAndView modelAndView(Model model, Authentication authentication) {
+        Person personEntity = personRepository.findByEmail(authentication.getName());
+        ModelAndView modelAndView = new ModelAndView("courses.html");
+        modelAndView.addObject("person",personEntity);
+        return modelAndView;
+    }
 }

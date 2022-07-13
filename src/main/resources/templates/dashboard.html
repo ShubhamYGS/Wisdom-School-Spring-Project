@@ -46,6 +46,7 @@ Author URL: http://w3layouts.com
     <div class="title-main text-center mx-auto mb-md-5 mb-4">
       <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
       <p class="" th:text="${'You logged in as - ' + roles}"></p>
+      <p class="" th:if="${!#strings.isEmpty(studentClass)}" th:text="${'You are studying in - ' + studentClass}"></p>
     </div>
 
   </div>

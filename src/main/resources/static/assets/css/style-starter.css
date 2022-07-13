@@ -11710,6 +11710,7 @@ fieldset:disabled .btn {
   --secondary-color: #00a4f5;
   --bg-color: #fff;
   --card-bg-color: #fff;
+  --tag-bg-color: #1DC295;
   --heading-color: #060606;
   --font-color: #6f6f6f;
   --border-radius: 8px;
@@ -19745,7 +19746,7 @@ ul.rating-list li a.review-color {
 }
 
 .meta-list a {
-  background: #1DC295;
+  background: var(--tag-bg-color);
   display: inline-block;
   border-radius: 3px;
   font-size: 12px;
