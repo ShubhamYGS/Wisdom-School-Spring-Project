@@ -51,7 +51,7 @@ Author URL: http://w3layouts.com
                     <div class="col-lg-4 col-md-6 mt-4">
                         <div class="coursecard-single">
                             <div class="grids5-info position-relative">
-                                <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid" />
+                                <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid"/>
                                 <div class="meta-list">
                                     <a th:text="${course.tags}"></a>
                                 </div>
@@ -59,15 +59,16 @@ Author URL: http://w3layouts.com
                             <div class="content-main-top">
                                 <div class="content-top mb-4 mt-3">
                                     <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                        <li> <i class="fas fa-book-open" th:text="${course.lessonNo}"></i></li>
-                                        <li> <i class="fas fa-star" th:text="${course.rating}"></i></li>
+                                        <li><i class="fas fa-book-open" th:text="${course.lessonNo}"></i></li>
+                                        <li><i class="fas fa-star" th:text="${course.rating}"></i></li>
                                     </ul>
                                 </div>
                                 <h4 th:text="${course.name}"></h4>
                                 <p th:text="${course.descrip}"></p>
                                 <div class="top-content-border d-flex align-items-center justify-content-between mt-3 pt-3">
                                     <h6 th:text="${course.fees}"></h6>
-                                    <a class="btn btn-style-primary" th:href="@{/student/enrollStudent(courseId=${course.courseId})}">Enroll now<i
+                                    <a class="btn btn-style-primary"
+                                       th:href="@{/student/enrollStudent(courseId=${course.courseId})}">Enroll now<i
                                             class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -114,89 +115,12 @@ Author URL: http://w3layouts.com
 <!-- //footer block -->
 
 <!-- Js scripts -->
-<!-- move top -->
-<button onclick="topFunction()" id="movetop" title="Go to top">
-    <span class="fas fa-level-up-alt" aria-hidden="true"></span>
-</button>
-<script>
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-            scrollFunction()
-        };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("movetop").style.display = "block";
-            } else {
-                document.getElementById("movetop").style.display = "none";
-            }
-        }
-
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-<!-- //move top -->
-
-<!-- common jquery plugin -->
-<script src="/assets/js/jquery-3.3.1.min.js"></script>
-<!-- //common jquery plugin -->
-
-<!-- theme switch js (light and dark)-->
-<script src="/assets/js/theme-change.js"></script>
-<!-- //theme switch js (light and dark)-->
-
-<!-- MENU-JS -->
-<script>
-        $(window).on("scroll", function () {
-            var scroll = $(window).scrollTop();
-
-            if (scroll >= 80) {
-                $("#site-header").addClass("nav-fixed");
-            } else {
-                $("#site-header").removeClass("nav-fixed");
-            }
-        });
-
-        //Main navigation Active Class Add Remove
-        $(".navbar-toggler").on("click", function () {
-            $("header").toggleClass("active");
-        });
-        $(document).on("ready", function () {
-            if ($(window).width() > 991) {
-                $("header").removeClass("active");
-            }
-            $(window).on("resize", function () {
-                if ($(window).width() > 991) {
-                    $("header").removeClass("active");
-                }
-            });
-        });
-    </script>
-<!-- //MENU-JS -->
-
-<!-- disable body scroll which navbar is in active -->
-<script>
-        $(function () {
-            $('.navbar-toggler').click(function () {
-                $('body').toggleClass('noscroll');
-            })
-        });
-    </script>
-<!-- //disable body scroll which navbar is in active -->
-
 <!-- Change color everytime course tab refreshes -->
-    <script>
+<script>
         const randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         document.documentElement.style.setProperty('--tag-bg-color', randomColor);
-    </script>
 
-<!-- bootstrap -->
-<script src="/assets/js/bootstrap.min.js"></script>
-<!-- //bootstrap -->
-<!-- //Js scripts -->
+</script>
 </body>
 
 </html>
