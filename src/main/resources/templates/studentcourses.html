@@ -1,7 +1,3 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 
@@ -17,7 +13,6 @@ Author URL: http://w3layouts.com
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/css/style-starter.css">
 </head>
-
 <body>
 <!-- header -->
 <div id="header" th:replace="header :: header"></div>
@@ -27,7 +22,7 @@ Author URL: http://w3layouts.com
 <section class="inner-banner py-4">
     <div class="w3l-breadcrumb py-lg-4">
         <div class="container pt-4 pb-sm-4">
-            <h4 class="inner-text-title pt-5">Courses</h4>
+            <h4 class="inner-text-title pt-5">Enrolled Courses</h4>
             <ul class="breadcrumbs-custom-path">
                 <li><a th:href="@{/dashboard}">Dashboard</a></li>
                 <li class="active"><i class="fas fa-angle-right"></i>Courses</li>
@@ -36,7 +31,6 @@ Author URL: http://w3layouts.com
     </div>
 </section>
 <!-- //inner banner -->
-
 <!-- courses section -->
 <div class="w3l-grids-block-5 py-4">
     <div class="container py-md-4 py-4">
@@ -47,28 +41,29 @@ Author URL: http://w3layouts.com
 
         <div class="row justify-content-center">
             <table>
-                <tr th:each="course: ${courses}">
+                <tr th:each="course: ${person.courses}">
                     <div class="col-lg-4 col-md-6 mt-4">
                         <div class="coursecard-single">
                             <div class="grids5-info position-relative">
-                                <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid" />
-                                <div class="meta-list">
+                                <img th:src="@{${'/assets/uploadfile/'+course.courseImage}}" alt="" class="img-fluid"/>
+                                <div class="meta-list">-
                                     <a th:text="${course.tags}"></a>
                                 </div>
                             </div>
                             <div class="content-main-top">
                                 <div class="content-top mb-4 mt-3">
                                     <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                        <li> <i class="fas fa-book-open" th:text="${course.lessonNo}"></i></li>
-                                        <li> <i class="fas fa-star" th:text="${course.rating}"></i></li>
+                                        <li><i class="fas fa-book-open" th:text="${course.lessonNo}"></i></li>
+                                        <li><i class="fas fa-star" th:text="${course.rating}"></i></li>
                                     </ul>
                                 </div>
                                 <h4 th:text="${course.name}"></h4>
                                 <p th:text="${course.descrip}"></p>
-                                <div class="top-content-border d-flex align-items-center justify-content-between mt-3 pt-3">
-                                    <h6 th:text="${course.fees}"></h6>
-                                    <a class="btn btn-style-primary" th:href="@{/student/enrollStudent(courseId=${course.courseId})}">Enroll now<i
-                                            class="fas fa-arrow-right"></i></a>
+                                <div class="top-content-border d-flex align-items-center justify-content-center mt-3 pt-3">
+                                    <a class="btn btn-style-primary"
+                                       th:href="@{/student/unEnrollStudent(courseId=${course.courseId})}">Unenroll from
+                                        course<i
+                                                class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -76,43 +71,11 @@ Author URL: http://w3layouts.com
                 </tr>
             </table>
         </div>
-
-        <!-- pagination -->
-        <div class="pagination-style text-center mt-5">
-            <ul>
-                <li>
-                    <a th:if="${currentPage > 1}" th:href="@{'/student/courses/page/' + ${currentPage - 1}}">
-                        <span class="fa fa-angle-double-left" aria-hidden="true"></span>
-                    </a>
-                    <a th:unless="${currentPage > 1}" class="not-allowed" disabled="">
-                        <span class="fa fa-angle-double-left" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                    <li>
-                        <a th:if="${currentPage != i}" th:href="@{'/student/courses/page/' + ${i}}">[[${i}]]</a>
-                        <a class="active" th:unless="${currentPage != i}">[[${i}]]</a>
-                    </li>
-                </span>
-                <li>
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/student/courses/page/' + ${currentPage + 1}}">
-                        <span class="fa fa-angle-double-right" aria-hidden="true"></span>
-                    </a>
-                    <a th:unless="${currentPage < totalPages}" class="not-allowed" disabled="">
-                        <span class="fa fa-angle-double-right" aria-hidden="true"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- //pagination -->
     </div>
 </div>
-<!-- //courses section -->
-
 <!-- footer block -->
 <div th:replace="footer :: footer"></div>
 <!-- //footer block -->
-
 <!-- Js scripts -->
 <!-- move top -->
 <button onclick="topFunction()" id="movetop" title="Go to top">
@@ -188,7 +151,7 @@ Author URL: http://w3layouts.com
 <!-- //disable body scroll which navbar is in active -->
 
 <!-- Change color everytime course tab refreshes -->
-    <script>
+<script>
         const randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         document.documentElement.style.setProperty('--tag-bg-color', randomColor);
     </script>
@@ -198,5 +161,4 @@ Author URL: http://w3layouts.com
 <!-- //bootstrap -->
 <!-- //Js scripts -->
 </body>
-
 </html>

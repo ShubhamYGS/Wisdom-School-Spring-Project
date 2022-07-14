@@ -5,6 +5,9 @@ import com.webapp.ygsschool.model.Person;
 import com.webapp.ygsschool.repository.CoursesRepository;
 import com.webapp.ygsschool.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +26,17 @@ public class StudentController {
     @Autowired
     private PersonRepository personRepository;
 
-    @GetMapping(value = "/courses")
-    public ModelAndView showCoursesPage(Model model, Authentication authentication){
-        List<Courses> coursesList = coursesRepository.findAll();
+    @GetMapping(value = "/courses/page/{pageNum}")
+    public ModelAndView showCoursesPage(Model model, @PathVariable(name = "pageNum") int pageNum,
+                                        Authentication authentication){
+        int pageSize=3;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        Page<Courses> coursesPage = coursesRepository.findAll(pageable);
+        List<Courses> coursesList = coursesPage.getContent();
         Person personEntity = personRepository.findByEmail(authentication.getName());
         ModelAndView modelAndView = new ModelAndView("courses.html");
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", coursesPage.getTotalPages());
         modelAndView.addObject("person",personEntity);
         modelAndView.addObject("course",new Courses());
         modelAndView.addObject("courses",coursesList);
@@ -42,7 +51,7 @@ public class StudentController {
         personEntity.getCourses().add(courses.get());
         courses.get().getPersons().add(personEntity);
         personRepository.save(personEntity);
-        modelAndView.setViewName("redirect:/student/courses");
+        modelAndView.setViewName("redirect:/student/courses/page/1");
         return modelAndView;
     }
 
@@ -54,14 +63,14 @@ public class StudentController {
         personEntity.getCourses().remove(courses.get());
         courses.get().getPersons().remove(personEntity);
         personRepository.save(personEntity);
-        modelAndView.setViewName("redirect:/student/displayCourses");
+        modelAndView.setViewName("redirect:/student/displayCourses/page/1");
         return modelAndView;
     }
 
     @GetMapping("/displayCourses")
     public ModelAndView modelAndView(Model model, Authentication authentication) {
         Person personEntity = personRepository.findByEmail(authentication.getName());
-        ModelAndView modelAndView = new ModelAndView("courses.html");
+        ModelAndView modelAndView = new ModelAndView("studentcourses.html");
         modelAndView.addObject("person",personEntity);
         return modelAndView;
     }
