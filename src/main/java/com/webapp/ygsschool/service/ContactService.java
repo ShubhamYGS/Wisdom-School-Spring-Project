@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -38,9 +42,14 @@ public class ContactService {
         return isSaved;
     }
 
-    public List<Contact> findMsgsWithOpenStaus() {
-        List<Contact> contactMsgs = contactRepository.findByStatus(FormConstants.OPEN);
-        return contactMsgs;
+    public Page<Contact> findMsgsWithOpenStatus(int pageNum,String sortField, String sortDir) {
+        int pageSize=5;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending());
+        Page<Contact> msgPage = contactRepository.findByStatus(
+                FormConstants.OPEN,pageable);
+        return msgPage;
     }
 
     public boolean updateMsgStatus(int id) {
