@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("student")
@@ -67,11 +68,18 @@ public class StudentController {
         return modelAndView;
     }
 
-    @GetMapping("/displayCourses")
-    public ModelAndView modelAndView(Model model, Authentication authentication) {
+    @GetMapping("/displayCourses/page/{pageNum}")
+    public ModelAndView modelAndView(Model model, @PathVariable(name = "pageNum") int pageNum,
+                                     Authentication authentication) {
+        int pageSize=3;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         Person personEntity = personRepository.findByEmail(authentication.getName());
+        Page<Courses> coursesPage = coursesRepository.findPersonCourses(personEntity.getPersonId(),pageable);
+        List<Courses> courses = coursesPage.getContent();
         ModelAndView modelAndView = new ModelAndView("studentcourses.html");
-        modelAndView.addObject("person",personEntity);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", coursesPage.getTotalPages());
+        modelAndView.addObject("courses",courses);
         return modelAndView;
     }
 }

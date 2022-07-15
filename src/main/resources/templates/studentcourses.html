@@ -41,7 +41,7 @@
 
         <div class="row justify-content-center">
             <table>
-                <tr th:each="course: ${person.courses}">
+                <tr th:each="course: ${courses}">
                     <div class="col-lg-4 col-md-6 mt-4">
                         <div class="coursecard-single">
                             <div class="grids5-info position-relative">
@@ -71,6 +71,36 @@
                 </tr>
             </table>
         </div>
+
+        <!-- pagination -->
+        <div class="pagination-style text-center mt-5">
+            <ul>
+                <li>
+                    <a th:if="${currentPage > 1}" th:href="@{'/student/displayCourses/page/' + ${currentPage - 1}}">
+                        <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+                    </a>
+                    <a th:unless="${currentPage > 1}" class="not-allowed" disabled="">
+                        <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <li>
+                        <a th:if="${currentPage != i}" th:href="@{'/student/displayCourses/page/' + ${i}}">[[${i}]]</a>
+                        <a class="active" th:unless="${currentPage != i}">[[${i}]]</a>
+                    </li>
+                </span>
+                <li>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/student/displayCourses/page/' + ${currentPage + 1}}">
+                        <span class="fa fa-angle-double-right" aria-hidden="true"></span>
+                    </a>
+                    <a th:unless="${currentPage < totalPages}" class="not-allowed" disabled="">
+                        <span class="fa fa-angle-double-right" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- //pagination -->
+
     </div>
 </div>
 <!-- footer block -->

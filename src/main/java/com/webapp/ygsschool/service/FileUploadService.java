@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -16,17 +18,17 @@ public class FileUploadService {
 
     public final String UPLOAD_DIR = Paths.get("src/main/resources/static/assets/uploadfile/").toAbsolutePath().toString();
 
-    public boolean uploadFile(MultipartFile multipartFile) {
+    public boolean uploadFile(String fileName, MultipartFile multipartFile){
         boolean isUpload = false;
 
-        try {
-            Files.copy(multipartFile.getInputStream(),
-                    Paths.get(UPLOAD_DIR+ File.separator+multipartFile.getOriginalFilename()),
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            Files.copy(inputStream,
+                    Paths.get(UPLOAD_DIR+ File.separator+fileName),
                     StandardCopyOption.REPLACE_EXISTING);
 
             isUpload = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
 
         return isUpload;
