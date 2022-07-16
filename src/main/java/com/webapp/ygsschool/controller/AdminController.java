@@ -8,15 +8,24 @@ import com.webapp.ygsschool.repository.PersonRepository;
 import com.webapp.ygsschool.repository.WisdomClassRepository;
 import com.webapp.ygsschool.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -79,7 +88,6 @@ public class AdminController {
 
     @PostMapping("/addStudent")
     public ModelAndView addNewStudent(Model model, @ModelAttribute("person") Person person, HttpSession httpSession){
-        String errorMessage = null;
         ModelAndView modelAndView = new ModelAndView();
         WisdomClass wisdomClass = (WisdomClass) httpSession.getAttribute("wisdomClass");
         Person personEntity = personRepository.findByEmail(person.getEmail());
@@ -121,41 +129,58 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping("/displayCourses")
-    public ModelAndView displayCourses(Model model) {
-        List<Courses> coursesList = coursesRepository.findAll();
+    @RequestMapping("/displayCourses/page/{pageNum}")
+    public ModelAndView displayCourses(Model model, @PathVariable(name = "pageNum") int pageNum) {
         ModelAndView modelAndView = new ModelAndView("addcourses.html");
-        modelAndView.addObject("course",new Courses());
+        if(!model.containsAttribute("course")){
+            modelAndView.addObject("course", new Courses());
+        }
+        int pageSize=3;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        Page<Courses> coursesPage = coursesRepository.findAll(pageable);
+        List<Courses> coursesList = coursesPage.getContent();
+        modelAndView.addObject("currentPage", pageNum);
+        modelAndView.addObject("totalPages", coursesPage.getTotalPages());
         modelAndView.addObject("courses",coursesList);
         modelAndView.addObject("person",new Person());
         return modelAndView;
     }
 
     @PostMapping(value = "/addNewCourse")
-    public ModelAndView addNewCourse(Model model, @ModelAttribute("course") Courses course,
-                                     @RequestParam("file")MultipartFile multipartFile) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/admin/displayCourses");
+    public String addNewCourse(Model model,@Valid @ModelAttribute("course") Courses course, BindingResult errors,
+                                     @RequestParam("file")MultipartFile multipartFile,
+                                     RedirectAttributes redirectAttributes) {
+        if(errors.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.course",errors);
+            redirectAttributes.addFlashAttribute("course", course);
+            return "redirect:/admin/displayCourses/page/1";
+        }
+
+        String fileName;
 
         //Check if file is empty
         if(multipartFile.isEmpty()) {
-            System.out.println("Course Image file cannot be empty");
-            return modelAndView;
+            redirectAttributes.addFlashAttribute("errorMessage","Course Image file must not be empty");
+            return "redirect:/admin/displayCourses/page/1";
+        } else {
+            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         }
         //Upload File
-        if (!(fileUploadService.uploadFile(multipartFile))) {
-            System.out.println("Error while upload file. Try again!");
-            return modelAndView;
+        if (!(fileUploadService.uploadFile(fileName, multipartFile))) {
+            redirectAttributes.addFlashAttribute("errorMessage","Error while uploading course image. Try again!");
+            return "redirect:/admin/displayCourses/page/1";
         }
-        course.setCourseImage(multipartFile.getOriginalFilename());
+        course.setCourseImage(fileName);
         coursesRepository.save(course);
-        return modelAndView;
+        redirectAttributes.addFlashAttribute("addMessage",course.getName()+" course has been added successfully.");
+        return "redirect:/admin/displayCourses/page/1";
     }
 
-    @GetMapping(value = "/enrolledStudents")
-    public void showEnrolledStudents(Model model, @RequestParam("courseId") int courseId) {
-        ModelAndView modelAndView = new ModelAndView("addcourses.html");
+    @RequestMapping(value = "/enrolledStudents/{courseId}", method = {RequestMethod.GET})
+    public Set<Person> showEnrolledStudents(Model model, @PathVariable(name = "courseId") int courseId) {
         Optional<Courses> courseList = coursesRepository.findById(courseId);
-        modelAndView.addObject("courseList",courseList.get());
+        Set<Person> personList = courseList.get().getPersons();
+        model.addAttribute("courseList",personList);
+        return personList;
     }
 }
