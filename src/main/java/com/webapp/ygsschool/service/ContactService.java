@@ -52,18 +52,18 @@ public class ContactService {
         return msgPage;
     }
 
-    public boolean updateMsgStatus(int id) {
+    public boolean updateMsgStatus(int id, String updatedBy) {
         boolean isUpdated = false;
 
         //Updating the status to close if the contact_id is present
-        Optional<Contact> contact = contactRepository.findById(id);
-        contact.ifPresent(contact1 -> {
-            contact1.setStatus(FormConstants.CLOSE);
-        });
+//        Optional<Contact> contact = contactRepository.findById(id);
+//        contact.ifPresent(contact1 -> {
+//            contact1.setStatus(FormConstants.CLOSE);
+//        });
 
         //After updating the contact status details. Saving/updating the same contact object again by get method
-        Contact updatedContact = contactRepository.save(contact.get());
-        if(updatedContact != null && updatedContact.getUpdatedBy()!=null)
+        int updatedContactRow = contactRepository.updateStatusById(FormConstants.CLOSE,LocalDateTime.now(),updatedBy,id);
+        if(updatedContactRow > 0)
             isUpdated=true;
         return isUpdated;
     }
