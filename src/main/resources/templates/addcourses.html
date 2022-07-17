@@ -59,31 +59,31 @@
                         </button>
                     </div>
                     <form th:action="@{/admin/addNewCourse}" enctype="multipart/form-data" method="post" th:object="${course}">
-                        <div class="modal-body">
+                        <div class="modal-body contact-block">
                             <div class="mb-3">
                                 <label class="mb-2 required">Course Title</label>
-                                <input type="text" th:field="*{name}" class="form-control"  required  placeHolder="Enter Course Title">
+                                <input type="text" th:field="*{name}" class="contact-input"  required  placeHolder="Enter Course Title">
                             </div>
                             <div class="mb-3">
                             <label class="mb-2 required">Course Description</label>
-                            <textarea type="text" th:field="*{descrip}" maxlength="200" class="form-control"  required  placeHolder="Enter Course Description"/>
+                            <textarea type="text" th:field="*{descrip}" maxlength="200" class="contact-input"  required  placeHolder="Enter Course Description"/>
                             </div>
                             <div class="mb-3">
                                 <label class="mb-2 required">Tags for Course</label>
-                                <input type="text" th:field="*{tags}" class="form-control"  required  placeHolder="Enter Tags for course">
+                                <input type="text" th:field="*{tags}" class="contact-input"  required  placeHolder="Enter Tags for course">
                             </div>
                             <div class="mb-3">
                                 <label class="mb-2 required">Number of Lessons</label>
-                                <input type="text" th:field="*{lessonNo}" class="form-control"  required  placeHolder="Enter No. of Lessons">
+                                <input type="text" th:field="*{lessonNo}" class="contact-input"  required  placeHolder="Enter No. of Lessons">
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-6">
                                     <label class="mb-2 required">Rating</label>
-                                    <input type="text" th:field="*{rating}" class="form-control" required placeHolder="Enter Rating">
+                                    <input type="text" th:field="*{rating}" class="contact-input" required placeHolder="Enter Rating">
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="mb-2 required">Fees</label>
-                                    <input type="text" th:field="*{fees}" class="form-control"  required  placeHolder="Enter Fees for Course">
+                                    <input type="text" th:field="*{fees}" class="contact-input"  required  placeHolder="Enter Fees for Course">
                                 </div>
                             </div>
                             <div class="mb-3">

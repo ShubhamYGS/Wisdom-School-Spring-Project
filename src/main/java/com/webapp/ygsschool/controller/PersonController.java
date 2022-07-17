@@ -3,6 +3,9 @@ package com.webapp.ygsschool.controller;
 import com.webapp.ygsschool.model.Person;
 import com.webapp.ygsschool.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,6 +24,11 @@ public class PersonController {
 
     @GetMapping("/register")
     public String doRegister(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null && !(authentication instanceof AnonymousAuthenticationToken))
+            return "redirect:/dashboard";
+
         model.addAttribute("person",new Person());
         return "register.html";
     }

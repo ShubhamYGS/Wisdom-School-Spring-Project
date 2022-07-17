@@ -1,7 +1,9 @@
 package com.webapp.ygsschool.controller;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,11 @@ public class LoginController {
                                    @RequestParam(value = "logout", required = false) String logout,
                                    @RequestParam(value = "register", required = false) String register,
                                    Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null && !(authentication instanceof AnonymousAuthenticationToken))
+            return "redirect:/dashboard";
+
         String errorMessage = null;
         String logoutMessage = null;
         if(error != null) {
