@@ -42,7 +42,7 @@ public class ProjectSecurityConfig  {
         http
                 .authorizeHttpRequests( (auth)->auth
                     .mvcMatchers("/holidays","/dashboard","/displayProfile","/updateProfile").authenticated()
-                    .mvcMatchers("/","/index","/about","/login","/register","/contact").permitAll()
+                    .mvcMatchers("/","/index","/about","/login","/register","/contact","/career").permitAll()
                     .mvcMatchers("/displayMessages","/admin/**").hasRole("ADMIN")
                     .mvcMatchers("/student/**").hasRole("STUDENT")
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()

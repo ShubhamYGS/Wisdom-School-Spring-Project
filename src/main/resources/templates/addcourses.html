@@ -60,23 +60,24 @@
                     </div>
                     <form th:action="@{/admin/addNewCourse}" enctype="multipart/form-data" method="post" th:object="${course}">
                         <div class="modal-body contact-block">
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label class="mb-2 required">Course Title</label>
                                 <input type="text" th:field="*{name}" class="contact-input"  required  placeHolder="Enter Course Title">
                             </div>
-                            <div class="mb-3">
-                            <label class="mb-2 required">Course Description</label>
-                            <textarea type="text" th:field="*{descrip}" maxlength="200" class="contact-input"  required  placeHolder="Enter Course Description"/>
+                            <div class="mb-2">
+                                <label class="required">Course Description</label>
+                                <p id="result" style="text-align:right; margin-right:15px;">0/400</p>
+                            <textarea id="my-text" type="text" rows="3" th:field="*{descrip}" maxlength="400" required  placeHolder="Enter Course Description"/>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label class="mb-2 required">Tags for Course</label>
                                 <input type="text" th:field="*{tags}" class="contact-input"  required  placeHolder="Enter Tags for course">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label class="mb-2 required">Number of Lessons</label>
                                 <input type="text" th:field="*{lessonNo}" class="contact-input"  required  placeHolder="Enter No. of Lessons">
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-sm-6">
                                     <label class="mb-2 required">Rating</label>
                                     <input type="text" th:field="*{rating}" class="contact-input" required placeHolder="Enter Rating">
@@ -86,7 +87,7 @@
                                     <input type="text" th:field="*{fees}" class="contact-input"  required  placeHolder="Enter Fees for Course">
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label class="mb-2 required">Course Preview Image</label>
                                 <input type="file" name="file"  accept="image/png, image/jpeg, image/jpg">
                             </div>
@@ -220,5 +221,16 @@
         });
     });
     </script>
+    <script>
+    var myText = document.getElementById("my-text");
+    var result = document.getElementById("result");
+    var limit = 400;
+    result.textContent = 0 + "/" + limit;
+
+    myText.addEventListener("input",function(){
+        var textLength = myText.value.length;
+        result.textContent = textLength + "/" + limit;
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <script type="text/javascript"
+          src="/assets/js/jquery-3.3.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wisdom School</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/ico">
+  <!-- Google fonts -->
+  <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Template CSS Style link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/style-starter.css">
+</head>
+<body>
+<table class="table table-striped table-hover" style="text-align:center">
+  <thead class="table-dark">
+  <tr>
+    <th scope="col" >Student Name</th>
+    <th scope="col" >Student Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="perso: ${courseList}">
+    <td id="personName" name="personName" class="td-color" th:text="${perso.name}"></td>
+    <td id="personEmail" name="personEmail" class="td-color" th:text="${perso.email}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
