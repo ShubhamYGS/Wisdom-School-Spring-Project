@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `career` (
   `cgpa` varchar(20) NOT NULL,
   `job_title` varchar(100),
   `company` varchar(100),
-  `working` varchar(20),
+  `working` boolean default false,
   `resume` varchar(50),
   `status` varchar(20) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,

@@ -57,24 +57,32 @@
         <div class="col-xxl-4 col-sm-9" style="margin: auto;">
             <div class="card shadow-lg">
                 <div class="card-body p-5">
-                    <form th:action=@{/applyjob}  method="POST">
+                    <ul>
+                        <li class="alert alert-danger" role="alert"
+                            th:each="error: ${#fields.errors('career.*')}" th:text="${error}"></li>
+                        <li class="alert alert-success text-center" role="alert"
+                            th:if="${!#strings.isEmpty(jobMessage)}" th:text="${jobMessage}"></li>
+                        <li class="alert alert-danger text-center" role="alert"
+                            th:if="${!#strings.isEmpty(errorMessage)}" th:text="${errorMessage}"></li>
+                    </ul>
+                    <form th:action="@{/applyJob}" enctype="multipart/form-data"  method="POST" th:object="${career}">
                         <div class="titleCareer">
                             <span>Profile</span>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-6">
                                 <label class="mb-2 required">First Name</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" th:field="*{firstName}" class="form-control" required>
                             </div>
                             <div class="col-sm-6">
                                 <label class="mb-2 required">Last Name</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" th:field="*{lastName}" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="mb-2 required">E-Mail Address</label>
-                            <input type="email" class="form-control" value="" required>
+                            <input type="email" th:field="*{email}" class="form-control" value="" required>
                         </div>
 
                         <div class="titleCareer">
@@ -83,21 +91,21 @@
 
                         <div class="mb-3">
                             <label class="mb-2 required">Address</label>
-                            <textarea class="form-control" rows="2" maxlength="250"></textarea>
+                            <textarea class="form-control" th:field="*{address}" rows="2" maxlength="250" required></textarea>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-sm">
                                 <label class="mb-2 required">City</label>
-                                <input type="text" class="form-control">
+                                <input type="text" th:field="*{city}" class="form-control" required>
                             </div>
                             <div class="col-sm">
                                 <label class="mb-2 required">State</label>
-                                <input type="text" class="form-control">
+                                <input type="text" th:field="*{state}" class="form-control" required>
                             </div>
                             <div class="col-sm">
                                 <label class="mb-2 required">Zip Code</label>
-                                <input type="text" class="form-control">
+                                <input type="text" th:field="*{zipCode}" class="form-control" required>
                             </div>
                         </div>
 
@@ -107,7 +115,7 @@
 
                         <div class="mb-3">
                             <label class="mb-2">Write about yourself</label>
-                            <textarea id="my-text" class="form-control" maxlength="400" rows="4"></textarea>
+                            <textarea id="my-text" th:field="*{yourself}" class="form-control" maxlength="400" rows="4"></textarea>
                             <p id="result" style="text-align:right; margin-top: 10px;">0/400</p>
                         </div>
 
@@ -117,17 +125,17 @@
 
                         <div class="mb-3">
                             <label class="mb-2 required">College</label>
-                            <input type="text" class="form-control" value="" required>
+                            <input type="text" th:field="*{college}" class="form-control" value="" required>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-sm-6">
                                 <label class="mb-2 required">Degree</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" th:field="*{degree}" class="form-control" required>
                             </div>
                             <div class="col-sm-6">
                                 <label class="mb-2 required">Percentage / CGPA</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" th:field="*{cgpa}" class="form-control" required>
                             </div>
                         </div>
 
@@ -137,16 +145,16 @@
 
                         <div class="mb-3">
                             <label class="mb-2">Job Title</label>
-                            <input type="text" class="form-control">
+                            <input type="text" th:field="*{jobTitle}" class="form-control">
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-sm">
                                 <label class="mb-2">Company / School / College</label>
-                                <input type="text" class="form-control">
+                                <input type="text" th:field="*{company}" class="form-control">
                             </div>
                             <div class="form-check col-sm-6 mt-6">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" th:field="*{working}" value="true" type="checkbox" id="gridCheck">
                                 <label>
                                     Tick, If you are still working
                                 </label>
@@ -158,7 +166,7 @@
                         </div>
 
                         <div class="box">
-                            <input type="file" id="choose_file">
+                            <input type="file" name="file" accept="application/pdf, application/msword," id="choose_file" required>
                         </div>
                         <br>
                         <div class="align-items-center text-center">

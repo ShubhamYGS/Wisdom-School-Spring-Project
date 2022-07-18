@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -150,21 +151,19 @@ public class AdminController {
     public String addNewCourse(Model model,@Valid @ModelAttribute("course") Courses course, BindingResult errors,
                                      @RequestParam("file")MultipartFile multipartFile,
                                      RedirectAttributes redirectAttributes) {
+        //Check if image is empty
+        if(multipartFile.isEmpty()) {
+            ObjectError error = new ObjectError("course","Course Image file must not be empty");
+            errors.addError(error);
+        }
         if(errors.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.course",errors);
             redirectAttributes.addFlashAttribute("course", course);
             return "redirect:/admin/displayCourses/page/1";
         }
 
-        String fileName;
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
-        //Check if file is empty
-        if(multipartFile.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage","Course Image file must not be empty");
-            return "redirect:/admin/displayCourses/page/1";
-        } else {
-            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        }
         //Upload File
         if (!(fileUploadService.uploadFile(fileName, multipartFile))) {
             redirectAttributes.addFlashAttribute("errorMessage","Error while uploading course image. Try again!");
