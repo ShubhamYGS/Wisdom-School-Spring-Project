@@ -1,18 +1,20 @@
 package com.webapp.ygsschool.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Career extends BaseFormEntity{
 
     @Id
@@ -66,4 +68,8 @@ public class Career extends BaseFormEntity{
     private String resume;
 
     private String status;
+
+    @Transient
+    @DateTimeFormat(pattern = "dd-mm-yyyy hh:mm")
+    private Date datetime;
 }

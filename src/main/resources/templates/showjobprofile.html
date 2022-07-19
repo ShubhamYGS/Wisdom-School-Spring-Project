@@ -12,6 +12,8 @@
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/css/style-starter.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!-- header -->
@@ -40,9 +42,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="openResumeLabel">Resume / CV</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
 <!--                        <embed th:src="@{${'/assets/uploadfile/'+career.resume}}"-->
@@ -66,8 +66,33 @@
                         <p>Are you sure you want to reject this candidate ?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-danger">Yes</button>
+                        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</a>
+                        <a th:href="@{/admin/displayCareer/rejectCandidate(jobId=${career.jobId})}" type="submit" class="btn btn-danger">Yes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade login-block" id="openHire">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hire Candidate</h5>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="text-center mb-3">Schedule an Interview</h4>
+                        <div class="row-mb-3">
+                            <label class="mb-2">Candidate E-Mail Address: </label>
+                            <input type="email" th:field="*{career.email}" class="form-control" required>
+                        </div>
+                        <div class="row-mb-3">
+                            <label class="mb-2 mt-2">Select Date & Time for Interview: </label>
+                            <input type="datetime-local" th:field="*{career.datetime}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                        <a th:href="@{/admin/displayCareer/hireCandidate(jobId=${career.jobId})}" type="submit" class="btn btn-success">Send Meeting Invite</a>
                     </div>
                 </div>
             </div>
@@ -76,12 +101,10 @@
         <div class="card shadow-lg">
             <div class="card-body p-5">
                 <ul>
-                    <li class="alert alert-danger" role="alert"
-                        th:each="error: ${#fields.errors('career.*')}" th:text="${error}"></li>
                     <li class="alert alert-success text-center" role="alert"
-                        th:if="${!#strings.isEmpty(jobMessage)}" th:text="${jobMessage}"></li>
+                        th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
                     <li class="alert alert-danger text-center" role="alert"
-                        th:if="${!#strings.isEmpty(errorMessage)}" th:text="${errorMessage}"></li>
+                        th:if="${!#strings.isEmpty(failureMessage)}" th:text="${failureMessage}"></li>
                 </ul>
                 <form enctype="multipart/form-data" method="POST" th:object="${career}">
                     <div class="title-main text-center mx-auto mb-md-5 mb-4">
@@ -93,10 +116,11 @@
 
                     <div class="row mb-3">
                         <div class="col-sm-6">
-                            <label class="mb-2 required">E-Mail Address</label>
+                            <label class="mb-2">E-Mail Address</label>
                             <input type="email" th:field="*{email}" disabled class="form-control" value="" required>
                         </div>
-                        <div class="col-sm-6" style="margin-top:31px;">
+                        <div class="col-sm-6" style="margin-top:31px; margin:auto;">
+                            <label class="mb-2">Resume / CV</label>
                             <button class="btn main-btn" type="button"
                                     data-bs-toggle="modal" data-bs-target="#openResume">Click here to open Resume</button>
                         </div>
@@ -107,22 +131,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="mb-2 required">Address</label>
+                        <label class="mb-2">Address</label>
                         <textarea class="form-control" th:field="*{address}" disabled rows="2" maxlength="250"
                                   required></textarea>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-sm">
-                            <label class="mb-2 required">City</label>
+                            <label class="mb-2">City</label>
                             <input type="text" th:field="*{city}" disabled class="form-control" required>
                         </div>
                         <div class="col-sm">
-                            <label class="mb-2 required">State</label>
+                            <label class="mb-2">State</label>
                             <input type="text" th:field="*{state}" disabled class="form-control" required>
                         </div>
                         <div class="col-sm">
-                            <label class="mb-2 required">Zip Code</label>
+                            <label class="mb-2">Zip Code</label>
                             <input type="text" th:field="*{zipCode}" disabled class="form-control" required>
                         </div>
                     </div>
@@ -142,17 +166,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="mb-2 required">College</label>
+                        <label class="mb-2">College</label>
                         <input type="text" th:field="*{college}" disabled class="form-control" value="" required>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-sm-6">
-                            <label class="mb-2 required">Degree</label>
+                            <label class="mb-2">Degree</label>
                             <input type="text" th:field="*{degree}" disabled class="form-control" required>
                         </div>
                         <div class="col-sm-6">
-                            <label class="mb-2 required">Percentage / CGPA</label>
+                            <label class="mb-2">Percentage / CGPA</label>
                             <input type="text" th:field="*{cgpa}" disabled class="form-control" required>
                         </div>
                     </div>
@@ -180,9 +204,9 @@
                         </div>
                     </div>
                     <div class="login-center mt-5">
-                        <button type="button" class="btn btn-style">HIRE</button>
+                        <button type="button" class="btn btn-style btn-style-5" data-bs-toggle="modal" data-bs-target="#openHire">HIRE</button>
                         <div class="offset-2">
-                            <button type="button" class="btn btn-style" data-bs-toggle="modal" data-bs-target="#openReject">REJECT</button>
+                            <button type="button" class="btn btn-style btn-style-4" data-bs-toggle="modal" data-bs-target="#openReject">REJECT</button>
                         </div>
                     </div>
                 </form>

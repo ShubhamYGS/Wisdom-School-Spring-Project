@@ -55,4 +55,25 @@ public class CareerService {
         Optional<Career> career = careerRepository.findById(jobId);
         return career.get();
     }
+
+    public boolean rejectCandidate(int jobId) {
+        boolean isRejected = false;
+        Optional<Career> career = careerRepository.findById(jobId);
+        career.get().setStatus(FormConstants.REJECTED);
+        Career career1 = careerRepository.save(career.get());
+        if(career1 != null && career1.getJobId()>0)
+            isRejected = true;
+        return isRejected;
+    }
+
+    public boolean hireCandidate(int jobId) {
+        boolean isHired = false;
+        Optional<Career> career = careerRepository.findById(jobId);
+        career.get().setStatus(FormConstants.HIRED);
+        Career career1 = careerRepository.save(career.get());
+        //System.out.println("Date & Time: "+career.get().getDatetime().toString());
+        if(career1 != null && career1.getJobId()>0)
+            isHired = true;
+        return isHired;
+    }
 }

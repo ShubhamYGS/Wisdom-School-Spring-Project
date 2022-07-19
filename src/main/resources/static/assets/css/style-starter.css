@@ -28,7 +28,7 @@ Author URL: http://w3layouts.com
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
-  --bs-warning: #ffc107;
+  --bs-warning: #ff0000;
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
@@ -19230,6 +19230,14 @@ header.nav-fixed {
 .btn-style-3:hover {
   background: var(--primary-color);
 }
+.btn-style-4:hover {
+  color: #fff;
+  background: var(--bs-danger);
+}
+.btn-style-5:hover {
+  color: #fff;
+  background: var(--bs-success);
+}
 
 .btn-style-primary {
   padding: 0;
@@ -21571,4 +21579,9 @@ th > a:hover {
 .grid_sorting_button.active
 {
 	background: #fe4c50;
+}
+input[type="datetime-local"] {
+  position: relative;
+  color: var(--heading-color);
+  padding: 10px;
 }

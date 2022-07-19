@@ -59,4 +59,26 @@ public class CareerController {
         modelAndView.addObject("career",career);
         return modelAndView;
     }
+
+    @RequestMapping("/admin/displayCareer/rejectCandidate")
+    public ModelAndView rejectCandidate(@RequestParam("jobId") int jobId, RedirectAttributes redirectAttributes){
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayCareer/viewProfile?jobId="+jobId);
+        if(careerService.rejectCandidate(jobId)) {
+            redirectAttributes.addFlashAttribute("successMessage","You have successfully rejected this candidate");
+            return modelAndView;
+        }
+        redirectAttributes.addFlashAttribute("failureMessage","Unable to perform Reject Candidate action. Try again.");
+        return modelAndView;
+    }
+
+    @RequestMapping("/admin/displayCareer/hireCandidate")
+    public ModelAndView hireCandidate(@RequestParam("jobId") int jobId, RedirectAttributes redirectAttributes) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayCareer/viewProfile?jobId="+jobId);
+        if(careerService.hireCandidate(jobId)) {
+            redirectAttributes.addFlashAttribute("successMessage","You have successfully hired this candidate");
+            return modelAndView;
+        }
+        redirectAttributes.addFlashAttribute("failureMessage","Unable to perform Hire Candidate action. Try again.");
+        return modelAndView;
+    }
 }
