@@ -46,21 +46,19 @@
                         data-bs-toggle="modal" data-bs-target="#createClass">ADD CLASS</button>
             </div>
         </div>
-        <div class="modal fade login-block" id="createClass" tabindex="-1" role="dialog" aria-labelledby="createClassModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade login-block" id="createClass" tabindex="-1">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title" id="createClassLabel">Create New Class</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create New Class</h5>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form th:action="@{/admin/addNewClass}" method="post" th:object="${wisdomClass}">
                         <div class="modal-body">
                                 <label class="mb-2 required">Class Name</label>
                                 <input type="text" class="contact-input" th:field="*{name}" required  placeHolder="Enter Class Name">
                         </div>
-                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                        <div class="modal-footer justify-content-center">
                             <button type="submit" class="btn btn-style btn-style-3">Submit</button>
                         </div>
                     </form>

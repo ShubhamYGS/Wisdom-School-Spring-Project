@@ -51,4 +51,12 @@ public class CareerController {
         modelAndView.addObject("careerList",careerList);
         return modelAndView;
     }
+
+    @GetMapping("/admin/displayCareer/viewProfile")
+    public ModelAndView showJobProfile(@RequestParam("jobId") int jobId) {
+        Career career = careerService.findJobProfile(jobId);
+        ModelAndView modelAndView = new ModelAndView("showjobprofile.html");
+        modelAndView.addObject("career",career);
+        return modelAndView;
+    }
 }

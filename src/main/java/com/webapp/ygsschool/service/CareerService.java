@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CareerService {
@@ -48,5 +49,10 @@ public class CareerService {
     public List<Career> showJobsByType(String status) {
         List<Career> careerList = careerRepository.findByStatus(status);
         return careerList;
+    }
+
+    public Career findJobProfile(int jobId) {
+        Optional<Career> career = careerRepository.findById(jobId);
+        return career.get();
     }
 }

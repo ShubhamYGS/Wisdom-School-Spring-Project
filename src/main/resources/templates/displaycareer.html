@@ -81,7 +81,7 @@
                     <td class="td-color" th:text="${prof.email}"></td>
                     <td class="td-color" th:text="${prof.degree}"></td>
                     <td class="td-color" th:text="${prof.jobTitle}"></td>
-                    <td><a th:href="@{/viewProfile(id=${prof.jobId})}" class="btn main-btn">View Profile</a></td>
+                    <td><a th:href="@{/admin/displayCareer/viewProfile(jobId=${prof.jobId})}" class="btn main-btn">View Profile</a></td>
                 </tr>
                 </tbody>
             </table>

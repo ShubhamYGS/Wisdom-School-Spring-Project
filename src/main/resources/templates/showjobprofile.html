@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wisdom School</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/ico">
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
+</head>
+<body>
+<!-- header -->
+<div id="header" th:replace="header :: header"></div>
+<!-- header -->
+
+<!-- inner banner -->
+<section class="inner-banner py-4">
+    <div class="w3l-breadcrumb py-lg-4">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title pt-5">Job Profiles</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                <li><i class="fas fa-angle-right"></i><a th:href="@{/admin/displayCareer/open}">Career</a></li>
+                <li class="active"><i class="fas fa-angle-right"></i>Job Profile</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- //inner banner -->
+
+<section class="w3l-team-13 py-4" id="career">
+    <div class="container">
+        <div class="modal fade" id="openResume" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="openResumeLabel">Resume / CV</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+<!--                        <embed th:src="@{${'/assets/uploadfile/'+career.resume}}"-->
+<!--                               frameborder="0" width="100%" height="400px">-->
+                        <iframe width="100%" height="400px" th:src="@{${'/assets/uploadfile/'+career.resume}}"></iframe>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" data-bs-dismiss="modal" class="btn btn-style btn-style-3">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade login-block" id="openReject">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to reject this candidate ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="py-md-4 py-4 col-xxl-4 col-sm-9" style="margin: auto;">
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <ul>
+                    <li class="alert alert-danger" role="alert"
+                        th:each="error: ${#fields.errors('career.*')}" th:text="${error}"></li>
+                    <li class="alert alert-success text-center" role="alert"
+                        th:if="${!#strings.isEmpty(jobMessage)}" th:text="${jobMessage}"></li>
+                    <li class="alert alert-danger text-center" role="alert"
+                        th:if="${!#strings.isEmpty(errorMessage)}" th:text="${errorMessage}"></li>
+                </ul>
+                <form enctype="multipart/form-data" method="POST" th:object="${career}">
+                    <div class="title-main text-center mx-auto mb-md-5 mb-4">
+                        <h3 class="title-style" th:text="${career.firstName} + ' ' + ${career.lastName}"></h3>
+                    </div>
+                    <div class="titleCareer">
+                        <span>Profile</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-6">
+                            <label class="mb-2 required">E-Mail Address</label>
+                            <input type="email" th:field="*{email}" disabled class="form-control" value="" required>
+                        </div>
+                        <div class="col-sm-6" style="margin-top:31px;">
+                            <button class="btn main-btn" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#openResume">Click here to open Resume</button>
+                        </div>
+                    </div>
+
+                    <div class="titleCareer">
+                        <span>Contact Information</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="mb-2 required">Address</label>
+                        <textarea class="form-control" th:field="*{address}" disabled rows="2" maxlength="250"
+                                  required></textarea>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <label class="mb-2 required">City</label>
+                            <input type="text" th:field="*{city}" disabled class="form-control" required>
+                        </div>
+                        <div class="col-sm">
+                            <label class="mb-2 required">State</label>
+                            <input type="text" th:field="*{state}" disabled class="form-control" required>
+                        </div>
+                        <div class="col-sm">
+                            <label class="mb-2 required">Zip Code</label>
+                            <input type="text" th:field="*{zipCode}" disabled class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="titleCareer">
+                        <span>Biography</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="mb-2">About yourself</label>
+                        <textarea th:field="*{yourself}" disabled class="form-control" maxlength="400"
+                                  rows="4"></textarea>
+                    </div>
+
+                    <div class="titleCareer">
+                        <span>Education</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="mb-2 required">College</label>
+                        <input type="text" th:field="*{college}" disabled class="form-control" value="" required>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-6">
+                            <label class="mb-2 required">Degree</label>
+                            <input type="text" th:field="*{degree}" disabled class="form-control" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="mb-2 required">Percentage / CGPA</label>
+                            <input type="text" th:field="*{cgpa}" disabled class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="titleCareer">
+                        <span>Experience (if any)</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="mb-2">Job Title</label>
+                        <input type="text" th:field="*{jobTitle}" disabled class="form-control">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <label class="mb-2">Company / School / College</label>
+                            <input type="text" th:field="*{company}" disabled class="form-control">
+                        </div>
+                        <div class="form-check col-sm-6 mt-6">
+                            <input class="form-check-input" th:field="*{working}" disabled value="true" type="checkbox"
+                                   id="gridCheck">
+                            <label>
+                                Tick, If you are still working
+                            </label>
+                        </div>
+                    </div>
+                    <div class="login-center mt-5">
+                        <button type="button" class="btn btn-style">HIRE</button>
+                        <div class="offset-2">
+                            <button type="button" class="btn btn-style" data-bs-toggle="modal" data-bs-target="#openReject">REJECT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<!-- footer block -->
+<div th:replace="footer :: footer"></div>
+<!-- //footer block -->
+</body>
+</html>
