@@ -9,6 +9,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Service
 public class CareerService {
 
@@ -31,6 +33,8 @@ public class CareerService {
 
         career.setResume(fileName);
         career.setStatus(FormConstants.OPEN);
+        if(career.getJobTitle().isEmpty())
+            career.setJobTitle(FormConstants.JOB_TITLE_FRESHER);
 
         Career savedJob = careerRepository.save(career);
         if(savedJob != null && savedJob.getJobId()>0) {
@@ -39,5 +43,10 @@ public class CareerService {
         }
 
         return isSaved;
+    }
+
+    public List<Career> showJobsByType(String status) {
+        List<Career> careerList = careerRepository.findByStatus(status);
+        return careerList;
     }
 }

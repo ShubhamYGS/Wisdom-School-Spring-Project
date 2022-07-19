@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wisdom School</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/ico">
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
+</head>
+<body>
+<!-- header -->
+<div id="header" th:replace="header :: header"></div>
+<!-- header -->
+
+<!-- inner banner -->
+<section class="inner-banner py-4">
+    <div class="w3l-breadcrumb py-lg-4">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title pt-5">Job Profiles</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                <li class="active"><i class="fas fa-angle-right"></i>Career</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- //inner banner -->
+
+<section class="w3l-team-13 py-3" id="career">
+    <div class="container py-md-3 py-3">
+        <div class="title-main text-center mx-auto mb-md-5">
+            <h3 class="title-style">Wisdom School Jobs</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <div class="new_arrivals_sorting">
+                    <a id="openBtn"
+                       th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/open') ? 'active':''}"
+                       th:href="@{'/admin/displayCareer/open'}"
+                            class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
+                        OPEN
+                    </a>
+                    <a id="hireBtn"
+                       th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/hired') ? 'active':''}"
+                       th:href="@{'/admin/displayCareer/hired'}"
+                            class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
+                        HIRED
+                    </a>
+                    <a id="rejectBtn"
+                       th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/rejected') ? 'active':''}"
+                       th:href="@{'/admin/displayCareer/rejected'}"
+                            class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
+                        REJECTED
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive-md">
+            <table class="table table-striped table-hover dataTable" style="text-align:center">
+                <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Degree</th>
+                    <th>Current Job Title</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prof: ${careerList}">
+                    <td class="td-color" th:text="${prof.firstName} + ' ' + ${prof.lastName}"></td>
+                    <td class="td-color" th:text="${prof.email}"></td>
+                    <td class="td-color" th:text="${prof.degree}"></td>
+                    <td class="td-color" th:text="${prof.jobTitle}"></td>
+                    <td><a th:href="@{/viewProfile(id=${prof.jobId})}" class="btn main-btn">View Profile</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="login-center">
+        <a th:href="@{/dashboard}">
+            <button class="btn btn-style btn-style-3">BACK</button>
+        </a>
+    </div>
+
+</section>
+
+<!-- footer block -->
+<div th:replace="footer :: footer"></div>
+<!-- //footer block -->
+</body>
+</script>
+</html>

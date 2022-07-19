@@ -63,13 +63,14 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/unEnrollStudent", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView unEnrollStudent(Model model, @RequestParam("courseId") int courseId, Authentication authentication) {
+    public ModelAndView unEnrollStudent(Model model, @RequestParam("courseId") int courseId, Authentication authentication, RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView();
         Person personEntity = personRepository.findByEmail(authentication.getName());
         Optional<Courses> courses = coursesRepository.findById(courseId);
         personEntity.getCourses().remove(courses.get());
         courses.get().getPersons().remove(personEntity);
         personRepository.save(personEntity);
+        redirectAttributes.addFlashAttribute("unEnrollMessage","You have successfully UnEnrolled from Course: "+courses.get().getName());
         modelAndView.setViewName("redirect:/student/displayCourses/page/1");
         return modelAndView;
     }

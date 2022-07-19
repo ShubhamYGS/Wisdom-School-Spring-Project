@@ -21564,3 +21564,35 @@ th > a:hover {
   color: var(--primary-color);
   text-decoration: underline;
 }
+
+/***Display Career Status Option***/
+.new_arrivals_sorting
+{
+	display: inline-block;
+	border-radius: 3px;
+	overflow: visible;
+}
+.grid_sorting_button
+{
+	height: 40px;
+	min-width: 160px;
+	border: solid 1.2px #ebebeb;
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	background: var(--card-bg-color);
+	border-radius: 3px;
+	margin: 0;
+	float: left;
+	margin-left: -1px;
+	color: var(--heading-color);
+}
+.grid_sorting_button:hover
+{
+    color: var(--heading-color);
+	background: #FE7C7F !important;
+}
+.grid_sorting_button.active
+{
+	background: #fe4c50;
+}
