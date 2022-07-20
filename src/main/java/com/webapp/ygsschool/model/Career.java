@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -70,6 +71,6 @@ public class Career extends BaseFormEntity{
     private String status;
 
     @Transient
-    @DateTimeFormat(pattern = "dd-mm-yyyy hh:mm")
-    private Date datetime;
+    @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a")
+    private LocalDateTime datetime = LocalDateTime.now().plusDays(7).withHour(13).withMinute(30);
 }

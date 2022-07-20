@@ -71,7 +71,7 @@ public class CareerController {
         return modelAndView;
     }
 
-    @RequestMapping("/admin/displayCareer/hireCandidate")
+    @GetMapping("/admin/displayCareer/hireCandidate")
     public ModelAndView hireCandidate(@RequestParam("jobId") int jobId, RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayCareer/viewProfile?jobId="+jobId);
         if(careerService.hireCandidate(jobId)) {

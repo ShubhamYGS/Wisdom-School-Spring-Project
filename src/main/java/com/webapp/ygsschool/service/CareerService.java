@@ -22,6 +22,9 @@ public class CareerService {
     @Autowired
     private FileUploadService fileUploadService;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
+
     public boolean saveJobDetails(Career career, MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
         boolean isSaved = false;
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -61,6 +64,9 @@ public class CareerService {
         Optional<Career> career = careerRepository.findById(jobId);
         career.get().setStatus(FormConstants.REJECTED);
         Career career1 = careerRepository.save(career.get());
+        String subject = "Wisdom School Job Application";
+        String body = "Dear "+career.get().getFirstName()+", \n\nThank you for applying for the position of Professor at Wisdom School.\nWe regret to inform you that we are unable to consider your candidature further. \nWe wish you all the best for your future endeavors. \n\nRegards,\nWisdom School, Sangli";
+        emailSenderService.sendHireEmail(career.get().getEmail(),subject,body);
         if(career1 != null && career1.getJobId()>0)
             isRejected = true;
         return isRejected;
@@ -71,7 +77,9 @@ public class CareerService {
         Optional<Career> career = careerRepository.findById(jobId);
         career.get().setStatus(FormConstants.HIRED);
         Career career1 = careerRepository.save(career.get());
-        //System.out.println("Date & Time: "+career.get().getDatetime().toString());
+        String subject = "Wisdom School | Interview Invitation";
+        String body = "Dear "+career.get().getFirstName()+", \n\nCongratulations! Your application for the Professor position stood out to us and we would like to invite you for an interview at our Wisdom School. \nYour interview has been scheduled on "+career.get().getDatetime().toLocalDate()+" at 1:30 PM. \n\nRegards,\nWisdom School, Sangli";
+        emailSenderService.sendHireEmail(career.get().getEmail(),subject,body);
         if(career1 != null && career1.getJobId()>0)
             isHired = true;
         return isHired;
