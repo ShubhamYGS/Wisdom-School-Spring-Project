@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `pwd` varchar(200) NOT NULL,
   `role_id` int NOT NULL,
   `address_id` int NULL,
+  `reset_password_token` varchar(30) NULL,
   `created_at` TIMESTAMP NOT NULL,
   `created_by` varchar(50) NOT NULL,
   `updated_at` TIMESTAMP DEFAULT NULL,

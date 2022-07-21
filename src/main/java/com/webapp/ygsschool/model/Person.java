@@ -40,6 +40,9 @@ public class Person extends BaseFormEntity{
     @PasswordValidator
     private String pwd;
 
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
     /*
     * @Transient annotation make spring consider that this field is not compulsory for db table (ignore)*/
 

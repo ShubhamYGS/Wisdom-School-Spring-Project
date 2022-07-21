@@ -107,6 +107,14 @@
                         th:if="${!#strings.isEmpty(failureMessage)}" th:text="${failureMessage}"></li>
                 </ul>
                 <form enctype="multipart/form-data" method="POST" th:object="${career}">
+                    <span th:switch="${career.status}">
+                        <div th:case="HIRED" class="alert alert-primary text-center" role="alert">
+                          This candidate is already hired &#128515;
+                        </div>
+                        <div th:case="REJECTED" class="alert alert-primary text-center" role="alert">
+                          This candidate is already rejected &#128546;
+                        </div>
+                    </span>
                     <div class="title-main text-center mx-auto mb-md-5 mb-4">
                         <h3 class="title-style" th:text="${career.firstName} + ' ' + ${career.lastName}"></h3>
                     </div>
@@ -203,6 +211,7 @@
                             </label>
                         </div>
                     </div>
+
                     <div class="login-center mt-5">
                         <button type="button" class="btn btn-style btn-style-5" data-bs-toggle="modal" data-bs-target="#openHire">HIRE</button>
                         <div class="offset-2">

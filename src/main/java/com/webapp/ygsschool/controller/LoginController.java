@@ -22,6 +22,7 @@ public class LoginController {
     public String displayLoginPage(@RequestParam(value = "error", required = false) String error,
                                    @RequestParam(value = "logout", required = false) String logout,
                                    @RequestParam(value = "register", required = false) String register,
+                                   @RequestParam(value = "reset", required = false) String reset,
                                    Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -38,6 +39,9 @@ public class LoginController {
         }
         if(register != null) {
             logoutMessage = "You registered successfully. Login with your registered credentials :)";
+        }
+        if(reset != null) {
+            logoutMessage = "You have successfully reset your password. Login with your new credentials :)";
         }
         model.addAttribute("errorMessage",errorMessage);
         model.addAttribute("logoutMessage",logoutMessage);
