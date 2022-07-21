@@ -40,6 +40,12 @@
     <div class="table-responsive-class">
 
         <div class="row mb-4">
+            <ul>
+                <li class="alert alert-danger" role="alert"
+                    th:each="error: ${#fields.errors('wisdomClass.*')}" th:text="${error}"></li>
+                <li class="alert alert-success text-center" role="alert"
+                    th:if="${!#strings.isEmpty(addMessage)}" th:text="${addMessage}"></li>
+            </ul>
             <div class="overview-wrap">
                 <h3 class="heading-21921">WisdomSchool Class Details</h3>
                 <button class="btn main-btn" type="button"
@@ -56,7 +62,7 @@
                     <form th:action="@{/admin/addNewClass}" method="post" th:object="${wisdomClass}">
                         <div class="modal-body">
                                 <label class="mb-2 required">Class Name</label>
-                                <input type="text" class="contact-input" th:field="*{name}" required  placeHolder="Enter Class Name">
+                                <input type="text" class="contact-input" th:field="*{name}"  placeHolder="Enter Class Name" required>
                         </div>
                         <div class="modal-footer justify-content-center">
                             <button type="submit" class="btn btn-style btn-style-3">Submit</button>

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,20 +47,28 @@ public class AdminController {
     public ModelAndView displayClasses(Model model) {
         List<WisdomClass> wisdomClassList = wisdomClassRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("classes.html");
-        modelAndView.addObject("wisdomClass",new WisdomClass());
+        if(!model.containsAttribute("wisdomClass")){
+            modelAndView.addObject("wisdomClass",new WisdomClass());
+        }
         modelAndView.addObject("wisdomClasses",wisdomClassList);
         return modelAndView;
     }
 
     @PostMapping("/addNewClass")
-    public ModelAndView saveClassDetails(Model model, @ModelAttribute("wisdomClass") WisdomClass wisdomClass) {
+    public String saveClassDetails(Model model,@Valid @ModelAttribute("wisdomClass") WisdomClass wisdomClass, BindingResult errors,
+                                   RedirectAttributes redirectAttributes) {
+        if(errors.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.wisdomClass",errors);
+            redirectAttributes.addFlashAttribute("wisdomClass", wisdomClass);
+            return "redirect:/admin/displayClasses";
+        }
         wisdomClassRepository.save(wisdomClass);
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayClasses");
-        return modelAndView;
+        redirectAttributes.addFlashAttribute("addMessage",wisdomClass.getName()+" has been added successfully.");
+        return "redirect:/admin/displayClasses";
     }
 
     @RequestMapping("/deleteClass")
-    public ModelAndView deleteClass(Model model, @RequestParam int id) {
+    public ModelAndView deleteClass(Model model, @RequestParam int id, RedirectAttributes redirectAttributes) {
         Optional<WisdomClass> wisdomClass = wisdomClassRepository.findById(id);
         for(Person person: wisdomClass.get().getPersons()) {
             person.setWisdomClass(null);
@@ -69,6 +76,7 @@ public class AdminController {
         }
         wisdomClassRepository.deleteById(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayClasses");
+        redirectAttributes.addFlashAttribute("addMessage",wisdomClass.get().getName()+" has been deleted successfully");
         return modelAndView;
     }
 

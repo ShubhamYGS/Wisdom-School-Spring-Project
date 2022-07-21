@@ -1,7 +1,7 @@
 package com.webapp.ygsschool.controller;
 
 import com.webapp.ygsschool.model.Person;
-import com.webapp.ygsschool.service.ForgotPasswordService;
+import com.webapp.ygsschool.service.ResetPasswordService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ResetPasswordController {
 
     @Autowired
-    private ForgotPasswordService forgotPasswordService;
+    private ResetPasswordService resetPasswordService;
 
     @GetMapping("/forgot")
     public String showForgotPasswordPage() {
@@ -29,20 +29,20 @@ public class ResetPasswordController {
         String email = request.getParameter("email");
         String token = RandomString.make(30);
 
-        if(!(forgotPasswordService.updateResetPasswordToken(token, email))) {
+        if(!(resetPasswordService.updateResetPasswordToken(token, email))) {
             redirectAttributes.addFlashAttribute("failureMessage","No user found. Please enter correct email.");
             return "redirect:/forgot";
         }
         String siteURL = request.getRequestURL().toString();
         String resetPasswordLink =  siteURL.replace(request.getServletPath(), "")+ "/reset_password?token=" + token;
-        forgotPasswordService.sendResetPasswordLinkEmail(email, resetPasswordLink);
+        resetPasswordService.sendResetPasswordLinkEmail(email, resetPasswordLink);
         redirectAttributes.addFlashAttribute("successMessage","We have sent a reset password link to your email. Please check.");
         return "redirect:/forgot";
     }
 
     @GetMapping("/reset_password")
     public String showResetPasswordPage(@RequestParam("token") String token, Model model) {
-        Person person = forgotPasswordService.getByResetPasswordToken(token);
+        Person person = resetPasswordService.getByResetPasswordToken(token);
         model.addAttribute("token",token);
 
         if(person == null) {
@@ -56,12 +56,12 @@ public class ResetPasswordController {
         String token = request.getParameter("token");
         String password = request.getParameter("password");
 
-        Person person = forgotPasswordService.getByResetPasswordToken(token);
+        Person person = resetPasswordService.getByResetPasswordToken(token);
         if(person == null) {
             throw new RuntimeException("Invalid Password token, please try again!");
         }
 
-        forgotPasswordService.updatePassword(person, password);
+        resetPasswordService.updatePassword(person, password);
 
         return "redirect:/login?reset=true";
     }
