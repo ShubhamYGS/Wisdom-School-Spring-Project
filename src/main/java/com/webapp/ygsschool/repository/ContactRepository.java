@@ -18,7 +18,7 @@ import java.util.List;
 public interface ContactRepository extends CrudRepository<Contact,Integer> {
 
     //When you want to create your own custom query (Derived Query Type)
-    List<Contact> findByStatus(String status);
+    //List<Contact> findByStatus(String status);
 
     Page<Contact> findByStatus(String status, Pageable pageable);
 

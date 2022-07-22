@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-@Controller
+@Controller("ProfileControllerBean")
 public class ProfileController {
 
     @Autowired

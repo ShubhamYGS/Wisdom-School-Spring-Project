@@ -43,11 +43,11 @@ public class ProjectSecurityConfig  {
                 .authorizeHttpRequests( (auth)->auth
                     .mvcMatchers("/holidays","/dashboard","/displayProfile","/updateProfile").authenticated()
                     .mvcMatchers("/","/index","/about","/login","/register","/contact","/career","/forgot","/reset_password/**").permitAll()
-                    .mvcMatchers("/displayMessages","/admin/**").hasRole("ADMIN")
+                    .mvcMatchers("/displayMessages","/admin/**","/data-api/**").hasRole("ADMIN")
                     .mvcMatchers("/student/**").hasRole("STUDENT")
                    //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
-                .csrf().ignoringAntMatchers("/saveMsg").and()
+                .csrf().ignoringAntMatchers("/saveMsg","/data-api/**").and()
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form ->form
                     .loginPage("/login")

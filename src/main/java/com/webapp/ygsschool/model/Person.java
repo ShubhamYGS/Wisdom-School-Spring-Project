@@ -1,5 +1,6 @@
 package com.webapp.ygsschool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webapp.ygsschool.annotation.FieldsValueMatch;
 import com.webapp.ygsschool.annotation.PasswordValidator;
 import lombok.Data;
@@ -38,9 +39,11 @@ public class Person extends BaseFormEntity{
     @NotBlank(message = "Password must not be blank")
     @Size(min = 5, message = "Password must be at least 4 characters long")
     @PasswordValidator
+    @JsonIgnore
     private String pwd;
 
     @Column(name = "reset_password_token")
+    @JsonIgnore
     private String resetPasswordToken;
 
     /*
@@ -48,6 +51,7 @@ public class Person extends BaseFormEntity{
 
     @NotBlank(message = "Password must not be blank")
     @Transient
+    @JsonIgnore
     private String confirmpwd;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
