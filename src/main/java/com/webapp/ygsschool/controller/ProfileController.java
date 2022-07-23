@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -44,7 +45,7 @@ public class ProfileController {
 
     @PostMapping(value = "/updateProfile")
     public String updateUserProfile(@Valid @ModelAttribute("profile") Profile profile, Errors errors,
-                                  HttpSession httpSession) {
+                                    HttpSession httpSession, RedirectAttributes redirectAttributes) {
         if(errors.hasErrors())
             return "profile.html";
 
@@ -64,7 +65,7 @@ public class ProfileController {
         //Copying the saved person object and passing it httpSession. So that profile will be updated with new details.
         Person savedPerson = personRepository.save(person);
         httpSession.setAttribute("loggedInPerson",savedPerson);
-
+        redirectAttributes.addFlashAttribute("successMessage","Your profile has been updated successfully.");
         return "redirect:/displayProfile";
     }
 }

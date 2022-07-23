@@ -46,6 +46,8 @@
           <li class="alert alert-danger" role="alert"
               th:each="error: ${#fields.errors('profile.*')}" th:text="${error}">
           </li>
+          <li class="alert alert-success text-center" role="alert"
+              th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
         </ul>
         <form th:action=@{/updateProfile}  method="POST" th:object="${profile}">
           <div class="titleCareer">
@@ -59,7 +61,7 @@
           <div class="row mb-3">
             <div class="col-sm">
               <label class="mb-2 required">E-Mail Address</label>
-              <input th:field="*{email}" type="email" class="form-control" value="" required>
+              <input th:field="*{email}" type="email" class="form-control" required>
             </div>
             <div class="col-sm">
               <label class="mb-2 required">Mobile Number</label>
