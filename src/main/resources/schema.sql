@@ -46,23 +46,6 @@ CREATE TABLE IF NOT EXISTS `address` (
    PRIMARY KEY (`address_id`)
 );
 
-CREATE TABLE IF NOT EXISTS `person` (
-  `person_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `pwd` varchar(200) NOT NULL,
-  `role_id` int NOT NULL,
-  `address_id` int NULL,
-  `reset_password_token` varchar(30) NULL,
-  `created_at` TIMESTAMP NOT NULL,
-  `created_by` varchar(50) NOT NULL,
-  `updated_at` TIMESTAMP DEFAULT NULL,
-  `updated_by` varchar(50) DEFAULT NULL,
-   PRIMARY KEY (`person_id`),
-   FOREIGN KEY (role_id) REFERENCES roles(role_id),
-   FOREIGN KEY (address_id) REFERENCES address(address_id)
-);
-
 CREATE TABLE IF NOT EXISTS `class` (
   `class_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -72,10 +55,25 @@ CREATE TABLE IF NOT EXISTS `class` (
   `updated_by` varchar(50) DEFAULT NULL,
    PRIMARY KEY (`class_id`)
 );
-ALTER TABLE `person`
-ADD COLUMN `class_id` int NULL AFTER `address_id`,
-ADD CONSTRAINT `FK_CLASS_CLASS_ID` FOREIGN KEY (`class_id`)
-REFERENCES `class`(`class_id`);
+
+CREATE TABLE IF NOT EXISTS `person` (
+  `person_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `pwd` varchar(200) NOT NULL,
+  `role_id` int NOT NULL,
+  `address_id` int NULL,
+  `class_id` int NULL,
+  `reset_password_token` varchar(30) NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `created_by` varchar(50) NOT NULL,
+  `updated_at` TIMESTAMP DEFAULT NULL,
+  `updated_by` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`person_id`),
+   FOREIGN KEY (role_id) REFERENCES roles(role_id),
+   FOREIGN KEY (address_id) REFERENCES address(address_id),
+   FOREIGN KEY (`class_id`) REFERENCES class(class_id)
+);
 
 CREATE TABLE IF NOT EXISTS `courses` (
   `course_id` int NOT NULL AUTO_INCREMENT,

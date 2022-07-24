@@ -46,9 +46,10 @@ INSERT INTO `roles` (`role_name`,`created_at`, `created_by`)
   VALUES ('STUDENT',CURDATE(),'DBA');
 
 --Add Admin Manually
-insert into person value (1, 'Admin', 'admin@gmail.com', 'admin', 1, null, curdate(), 'Shubham', curdate(), 'Shubham')
+--insert into person value (1, 'Admin', 'admin@gmail.com', 'admin', 1, null, curdate(), 'Shubham', curdate(), 'Shubham')
 --Hashed Value of Password (Generated using BcryptPasswordEncoder)
-insert into person value (1, 'Admin', 'admin@gmail.com', '$2a$12$YRI8MSjVpyV6xRWpRJubSuj5U15Pv0T9UFo2VABtAzXRzkqW.7osa', 1, null, curdate(), 'Shubham', curdate(), 'Shubham')
+insert into `person` (`name`,`email`,`pwd`,`role_id`,`created_at`,`created_by`,`updated_at`,`updated_by`)
+ values ('Admin', 'admin@gmail.com', '$2a$12$YRI8MSjVpyV6xRWpRJubSuj5U15Pv0T9UFo2VABtAzXRzkqW.7osa', 1, curdate(), 'Shubham', curdate(), 'Shubham')
 
 --Inserting contact msg for testing
 INSERT INTO `contact_msg` (`name`,`email`,`subject`,`message`,`status`,`created_at`, `created_by`)
