@@ -54,6 +54,10 @@ Coming soon
 - [Bootstrap](https://getbootstrap.com/)
 - [MySQL Database](https://www.mysql.com/)
 
+## Database Schema Diagram
+
+![Schema](https://user-images.githubusercontent.com/33577947/180804066-a2dbb8fb-ad1c-4992-af1b-73b9462402a4.png)
+
 ## Visit our Website
 [Click here to Visit Wisdom School Website](https://wisdomschool-spring-shubhamygs.herokuapp.com/)
 - Cloud Used: [Heroku](https://www.heroku.com/)
