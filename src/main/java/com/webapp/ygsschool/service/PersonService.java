@@ -21,6 +21,7 @@ public class PersonService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // While registering the user. Assigning student role and password save it into database
     public boolean savePersonDetails(Person person) {
         boolean isSaved = false;
         Roles roles = rolesRepository.getByRoleName(FormConstants.ROLE_STUDENT);
@@ -29,7 +30,7 @@ public class PersonService {
         person.setPwd(passwordEncoder.encode(person.getPwd()));
         //Saving person information in database
         person = personRepository.save(person);
-        if(person != null && person.getPersonId()>0)
+        if (person != null && person.getPersonId() > 0)
             isSaved = true;
         return isSaved;
     }

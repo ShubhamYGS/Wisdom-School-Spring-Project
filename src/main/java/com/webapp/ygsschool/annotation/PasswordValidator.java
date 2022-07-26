@@ -7,9 +7,9 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /*
-* These custom annotations is made with help of Original Annotation present under Jakarta validation external library (constraint);
-* @Constraint annotation is having a class on which this interface is depend (Main business logic)
-* */
+ * These custom annotations is made with help of Original Annotation present under Jakarta validation external library (constraint);
+ * @Constraint annotation is having a class on which this interface is depend (Main business logic)
+ * */
 
 @Documented
 @Constraint(validatedBy = PasswordStrengthValidator.class)

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "holidays")
-public class Holiday extends BaseFormEntity{
+public class Holiday extends BaseFormEntity {
 
     @Id
     private String day;
@@ -18,6 +18,6 @@ public class Holiday extends BaseFormEntity{
     private Type type;
 
     public enum Type {
-        FESTIVAL, FEDERAL;
+        FESTIVAL, FEDERAL
     }
 }

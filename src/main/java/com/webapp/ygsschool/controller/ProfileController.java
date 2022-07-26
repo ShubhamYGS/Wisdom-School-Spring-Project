@@ -23,14 +23,19 @@ public class ProfileController {
     @Autowired
     private PersonRepository personRepository;
 
+    // Displaying the User Profile
     @RequestMapping("/displayProfile")
-    public ModelAndView displayProfilePage(Model model, HttpSession httpSession){
+    public ModelAndView displayProfilePage(Model model, HttpSession httpSession) {
+        // Get the loggedInPerson session which was passed from Dashboard
         Person person = (Person) httpSession.getAttribute("loggedInPerson");
+
+        // Creating new profile with setting the already having data like Name & Email
         Profile profile = new Profile();
         profile.setName(person.getName());
         profile.setEmail(person.getEmail());
 
-        if(person.getAddress()!=null && person.getAddress().getAddressId()>0) {
+        // When person has updated his details set them in field
+        if (person.getAddress() != null && person.getAddress().getAddressId() > 0) {
             profile.setMobileNumber(person.getAddress().getMobileNumber());
             profile.setAddress1(person.getAddress().getAddress1());
             profile.setCity(person.getAddress().getCity());
@@ -39,23 +44,27 @@ public class ProfileController {
         }
 
         ModelAndView modelAndView = new ModelAndView("profile.html");
-        modelAndView.addObject("profile",profile);
+        modelAndView.addObject("profile", profile);
         return modelAndView;
     }
 
+    // Updating the user profile
     @PostMapping(value = "/updateProfile")
     public String updateUserProfile(@Valid @ModelAttribute("profile") Profile profile, Errors errors,
                                     HttpSession httpSession, RedirectAttributes redirectAttributes) {
-        if(errors.hasErrors())
+        // If there are any validation error show them on page
+        if (errors.hasErrors())
             return "profile.html";
 
         Person person = (Person) httpSession.getAttribute("loggedInPerson");
         person.setName(profile.getName());
         person.setEmail(profile.getEmail());
 
-        if(person.getAddress()==null || !(person.getAddress().getAddressId()>0)) {
+        // If the address details are empty create new address object
+        if (person.getAddress() == null || !(person.getAddress().getAddressId() > 0)) {
             person.setAddress(new Address());
         }
+        // Setting all the data again (In case User has modified any of the field it may help)
         person.getAddress().setMobileNumber(profile.getMobileNumber());
         person.getAddress().setAddress1(profile.getAddress1());
         person.getAddress().setState(profile.getState());
@@ -64,8 +73,9 @@ public class ProfileController {
 
         //Copying the saved person object and passing it httpSession. So that profile will be updated with new details.
         Person savedPerson = personRepository.save(person);
-        httpSession.setAttribute("loggedInPerson",savedPerson);
-        redirectAttributes.addFlashAttribute("successMessage","Your profile has been updated successfully.");
+        httpSession.setAttribute("loggedInPerson", savedPerson);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Your profile has been updated successfully.");
         return "redirect:/displayProfile";
     }
 }

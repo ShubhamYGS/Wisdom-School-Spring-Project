@@ -45,19 +45,19 @@
                     <a id="openBtn"
                        th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/open') ? 'active':''}"
                        th:href="@{'/admin/displayCareer/open'}"
-                            class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
+                       class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
                         OPEN
                     </a>
                     <a id="hireBtn"
                        th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/hired') ? 'active':''}"
                        th:href="@{'/admin/displayCareer/hired'}"
-                            class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
+                       class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
                         HIRED
                     </a>
                     <a id="rejectBtn"
                        th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/rejected') ? 'active':''}"
                        th:href="@{'/admin/displayCareer/rejected'}"
-                            class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
+                       class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center">
                         REJECTED
                     </a>
                 </div>
@@ -81,7 +81,8 @@
                     <td class="td-color" th:text="${prof.email}"></td>
                     <td class="td-color" th:text="${prof.degree}"></td>
                     <td class="td-color" th:text="${prof.jobTitle}"></td>
-                    <td><a th:href="@{/admin/displayCareer/viewProfile(jobId=${prof.jobId})}" class="btn main-btn">View Profile</a></td>
+                    <td><a th:href="@{/admin/displayCareer/viewProfile(jobId=${prof.jobId})}" class="btn main-btn">View
+                        Profile</a></td>
                 </tr>
                 </tbody>
             </table>

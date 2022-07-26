@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Roles extends BaseFormEntity{
+public class Roles extends BaseFormEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

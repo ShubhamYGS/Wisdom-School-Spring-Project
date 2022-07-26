@@ -42,11 +42,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="openResumeLabel">Resume / CV</h5>
-                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-<!--                        <embed th:src="@{${'/assets/uploadfile/'+career.resume}}"-->
-<!--                               frameborder="0" width="100%" height="400px">-->
+                        <!--                        <embed th:src="@{${'/assets/uploadfile/'+career.resume}}"-->
+                        <!--                               frameborder="0" width="100%" height="400px">-->
                         <iframe width="100%" height="400px" th:src="@{${'/assets/uploadfile/'+career.resume}}"></iframe>
                     </div>
                     <div class="modal-footer justify-content-center">
@@ -60,14 +61,16 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Confirmation</h5>
-                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p>Are you sure you want to reject this candidate ?</p>
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</a>
-                        <a th:href="@{/admin/displayCareer/rejectCandidate(jobId=${career.jobId})}" type="submit" class="btn btn-danger">Yes</a>
+                        <a th:href="@{/admin/displayCareer/rejectCandidate(jobId=${career.jobId})}" type="submit"
+                           class="btn btn-danger">Yes</a>
                     </div>
                 </div>
             </div>
@@ -77,7 +80,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Hire Candidate</h5>
-                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-red" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <h4 class="text-center mb-3">Schedule an Interview</h4>
@@ -92,22 +96,23 @@
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
-                        <a th:href="@{/admin/displayCareer/hireCandidate(jobId=${career.jobId})}" type="submit" class="btn btn-success">Send Meeting Invite</a>
+                        <a th:href="@{/admin/displayCareer/hireCandidate(jobId=${career.jobId})}" type="submit"
+                           class="btn btn-success">Send Meeting Invite</a>
                     </div>
                 </div>
             </div>
         </div>
-    <div class="py-md-4 py-4 col-xxl-4 col-sm-9" style="margin: auto;">
-        <div class="card shadow-lg">
-            <div class="card-body p-5">
-                <ul>
-                    <li class="alert alert-success text-center" role="alert"
-                        th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
-                    <li class="alert alert-danger text-center" role="alert"
-                        th:if="${!#strings.isEmpty(failureMessage)}" th:text="${failureMessage}"></li>
-                </ul>
-                <form enctype="multipart/form-data" method="POST" th:object="${career}">
-                    <span th:switch="${career.status}">
+        <div class="py-md-4 py-4 col-xxl-4 col-sm-9" style="margin: auto;">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <ul>
+                        <li class="alert alert-success text-center" role="alert"
+                            th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
+                        <li class="alert alert-danger text-center" role="alert"
+                            th:if="${!#strings.isEmpty(failureMessage)}" th:text="${failureMessage}"></li>
+                    </ul>
+                    <form enctype="multipart/form-data" method="POST" th:object="${career}">
+                    <span th:switch="${career.status}" th:if="${#strings.isEmpty(successMessage)}">
                         <div th:case="HIRED" class="alert alert-primary text-center" role="alert">
                           This candidate is already hired &#128515;
                         </div>
@@ -115,113 +120,119 @@
                           This candidate is already rejected &#128546;
                         </div>
                     </span>
-                    <div class="title-main text-center mx-auto mb-md-5 mb-4">
-                        <h3 class="title-style" th:text="${career.firstName} + ' ' + ${career.lastName}"></h3>
-                    </div>
-                    <div class="titleCareer">
-                        <span>Profile</span>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-sm-6">
-                            <label class="mb-2">E-Mail Address</label>
-                            <input type="email" th:field="*{email}" disabled class="form-control" value="" required>
+                        <div class="title-main text-center mx-auto mb-md-5 mb-4">
+                            <h3 class="title-style" th:text="${career.firstName} + ' ' + ${career.lastName}"></h3>
                         </div>
-                        <div class="col-sm-6" style="margin-top:31px; margin:auto;">
-                            <label class="mb-2">Resume / CV</label>
-                            <button class="btn main-btn" type="button"
-                                    data-bs-toggle="modal" data-bs-target="#openResume">Click here to open Resume</button>
+                        <div class="titleCareer">
+                            <span>Profile</span>
                         </div>
-                    </div>
 
-                    <div class="titleCareer">
-                        <span>Contact Information</span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="mb-2">Address</label>
-                        <textarea class="form-control" th:field="*{address}" disabled rows="2" maxlength="250"
-                                  required></textarea>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-sm">
-                            <label class="mb-2">City</label>
-                            <input type="text" th:field="*{city}" disabled class="form-control" required>
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label class="mb-2">E-Mail Address</label>
+                                <input type="email" th:field="*{email}" disabled class="form-control" value="" required>
+                            </div>
+                            <div class="col-sm-6" style="margin-top:31px; margin:auto;">
+                                <label class="mb-2">Resume / CV</label>
+                                <button class="btn main-btn" type="button"
+                                        data-bs-toggle="modal" data-bs-target="#openResume">Click here to open Resume
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-sm">
-                            <label class="mb-2">State</label>
-                            <input type="text" th:field="*{state}" disabled class="form-control" required>
+
+                        <div class="titleCareer">
+                            <span>Contact Information</span>
                         </div>
-                        <div class="col-sm">
-                            <label class="mb-2">Zip Code</label>
-                            <input type="text" th:field="*{zipCode}" disabled class="form-control" required>
+
+                        <div class="mb-3">
+                            <label class="mb-2">Address</label>
+                            <textarea class="form-control" th:field="*{address}" disabled rows="2" maxlength="250"
+                                      required></textarea>
                         </div>
-                    </div>
 
-                    <div class="titleCareer">
-                        <span>Biography</span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="mb-2">About yourself</label>
-                        <textarea th:field="*{yourself}" disabled class="form-control" maxlength="400"
-                                  rows="4"></textarea>
-                    </div>
-
-                    <div class="titleCareer">
-                        <span>Education</span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="mb-2">College</label>
-                        <input type="text" th:field="*{college}" disabled class="form-control" value="" required>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-sm-6">
-                            <label class="mb-2">Degree</label>
-                            <input type="text" th:field="*{degree}" disabled class="form-control" required>
+                        <div class="row mb-3">
+                            <div class="col-sm">
+                                <label class="mb-2">City</label>
+                                <input type="text" th:field="*{city}" disabled class="form-control" required>
+                            </div>
+                            <div class="col-sm">
+                                <label class="mb-2">State</label>
+                                <input type="text" th:field="*{state}" disabled class="form-control" required>
+                            </div>
+                            <div class="col-sm">
+                                <label class="mb-2">Zip Code</label>
+                                <input type="text" th:field="*{zipCode}" disabled class="form-control" required>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <label class="mb-2">Percentage / CGPA</label>
-                            <input type="text" th:field="*{cgpa}" disabled class="form-control" required>
-                        </div>
-                    </div>
 
-                    <div class="titleCareer">
-                        <span>Experience (if any)</span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="mb-2">Job Title</label>
-                        <input type="text" th:field="*{jobTitle}" disabled class="form-control">
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-sm">
-                            <label class="mb-2">Company / School / College</label>
-                            <input type="text" th:field="*{company}" disabled class="form-control">
+                        <div class="titleCareer">
+                            <span>Biography</span>
                         </div>
-                        <div class="form-check col-sm-6 mt-6">
-                            <input class="form-check-input" th:field="*{working}" disabled value="true" type="checkbox"
-                                   id="gridCheck">
-                            <label>
-                                Tick, If you are still working
-                            </label>
-                        </div>
-                    </div>
 
-                    <div class="login-center mt-5">
-                        <button type="button" class="btn btn-style btn-style-5" data-bs-toggle="modal" data-bs-target="#openHire">HIRE</button>
-                        <div class="offset-2">
-                            <button type="button" class="btn btn-style btn-style-4" data-bs-toggle="modal" data-bs-target="#openReject">REJECT</button>
+                        <div class="mb-3">
+                            <label class="mb-2">About yourself</label>
+                            <textarea th:field="*{yourself}" disabled class="form-control" maxlength="400"
+                                      rows="4"></textarea>
                         </div>
-                    </div>
-                </form>
+
+                        <div class="titleCareer">
+                            <span>Education</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="mb-2">College</label>
+                            <input type="text" th:field="*{college}" disabled class="form-control" value="" required>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <label class="mb-2">Degree</label>
+                                <input type="text" th:field="*{degree}" disabled class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="mb-2">Percentage / CGPA</label>
+                                <input type="text" th:field="*{cgpa}" disabled class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="titleCareer">
+                            <span>Experience (if any)</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="mb-2">Job Title</label>
+                            <input type="text" th:field="*{jobTitle}" disabled class="form-control">
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm">
+                                <label class="mb-2">Company / School / College</label>
+                                <input type="text" th:field="*{company}" disabled class="form-control">
+                            </div>
+                            <div class="form-check col-sm-6 mt-6">
+                                <input class="form-check-input" th:field="*{working}" disabled value="true"
+                                       type="checkbox"
+                                       id="gridCheck">
+                                <label>
+                                    Tick, If you are still working
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="login-center mt-5">
+                            <button type="button" class="btn btn-style btn-style-5" data-bs-toggle="modal"
+                                    data-bs-target="#openHire">HIRE
+                            </button>
+                            <div class="offset-2">
+                                <button type="button" class="btn btn-style btn-style-4" data-bs-toggle="modal"
+                                        data-bs-target="#openReject">REJECT
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 

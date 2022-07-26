@@ -7,17 +7,18 @@ Author URL: http://w3layouts.com
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wisdom School</title>
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/ico">
-  <!-- Google fonts -->
-  <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <!-- Template CSS Style link -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/style-starter.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wisdom School</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/ico">
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style-starter.css">
 </head>
 
 <body>
@@ -28,149 +29,150 @@ Author URL: http://w3layouts.com
 
 <!-- inner banner -->
 <section class="inner-banner py-4">
-  <div class="w3l-breadcrumb py-lg-4">
-    <div class="container pt-4 pb-sm-4">
-      <h4 class="inner-text-title pt-5">Dashboard</h4>
-      <ul class="breadcrumbs-custom-path">
-        <li><a th:href="@{/index}">Home</a></li>
-        <li class="active"><i class="fas fa-angle-right"></i>Dashboard</li>
-      </ul>
+    <div class="w3l-breadcrumb py-lg-4">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title pt-5">Dashboard</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a th:href="@{/index}">Home</a></li>
+                <li class="active"><i class="fas fa-angle-right"></i>Dashboard</li>
+            </ul>
+        </div>
     </div>
-  </div>
 </section>
 <!-- //inner banner -->
 
 <!-- login block -->
 <section class="w3l-contact py-4" id="contact">
-  <div class="container py-md-4 py-4">
-    <div class="title-main text-center mx-auto mb-md-5 mb-4">
-      <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
-      <p class="" th:text="${'You logged in as - ' + roles}"></p>
-      <p class="" th:if="${!#strings.isEmpty(studentClass)}" th:text="${'You are studying in - ' + studentClass}"></p>
-    </div>
+    <div class="container py-md-4 py-4">
+        <div class="title-main text-center mx-auto mb-md-5 mb-4">
+            <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
+            <p class="" th:text="${'You logged in as - ' + roles}"></p>
+            <p class="" th:if="${!#strings.isEmpty(studentClass)}"
+               th:text="${'You are studying in - ' + studentClass}"></p>
+        </div>
 
-  </div>
+    </div>
 </section>
 <!-- //login block -->
 <div class="container">
-  <div class="section__content section__content--p30">
-    <div class="container-fluid">
-      <div class="row m-t-25">
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
-          <a th:href="@{/displayProfile}">
-            <div class="overview-item overview-item--c1">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-id-card"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Profile</h2>
-                  </div>
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row m-t-25">
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a th:href="@{/displayProfile}">
+                        <div class="overview-item overview-item--c1">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-id-card"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Profile</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
-          <a th:href="@{/displayMessages/page/1?sortField=name&sortDir=desc}">
-            <div class="overview-item overview-item--c2">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-envelope-open-text"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Messages</h2>
-                  </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/displayMessages/page/1?sortField=name&sortDir=desc}">
+                        <div class="overview-item overview-item--c2">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-envelope-open-text"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Messages</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
-          <a th:href="@{/admin/displayCareer/open}">
-            <div class="overview-item overview-item--c1">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-user-tie"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Career</h2>
-                  </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/admin/displayCareer/open}">
+                        <div class="overview-item overview-item--c1">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Career</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
-          <a th:href="@{/holidays}">
-            <div class="overview-item overview-item--c2">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-smile-beam"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Holidays</h2>
-                  </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a th:href="@{/holidays}">
+                        <div class="overview-item overview-item--c2">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-smile-beam"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Holidays</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
-          <a th:href="@{/admin/displayClasses}">
-            <div class="overview-item overview-item--c3">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-school"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Classes</h2>
-                  </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/admin/displayClasses}">
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-school"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Classes</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
-          <a th:href="@{/student/displayCourses/page/1}">
-            <div class="overview-item overview-item--c4">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-book-reader"></i>
-                  </div>
-                  <div class="text">
-                    <h2>My Courses</h2>
-                  </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a th:href="@{/student/displayCourses/page/1}">
+                        <div class="overview-item overview-item--c4">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-book-reader"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>My Courses</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
-          <a th:href="@{/admin/displayCourses/page/1}">
-            <div class="overview-item overview-item--c4">
-              <div class="overview__inner">
-                <div class="overview-box clearfix text-center">
-                  <div class="icon">
-                    <i class="fas fa-book-reader"></i>
-                  </div>
-                  <div class="text">
-                    <h2>Courses</h2>
-                  </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/admin/displayCourses/page/1}">
+                        <div class="overview-item overview-item--c4">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix text-center">
+                                    <div class="icon">
+                                        <i class="fas fa-book-reader"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Courses</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
             </div>
-          </a>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <!-- Messages block -->
 

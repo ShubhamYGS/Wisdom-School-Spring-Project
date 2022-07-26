@@ -116,7 +116,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="perso: ${courseList}">
+                    <tr th:each="perso: ${personList}">
                         <td id="personName" name="personName" class="td-color" th:text="${perso.name}"></td>
                         <td id="personEmail" name="personEmail" class="td-color" th:text="${perso.email}"></td>
                     </tr>
@@ -208,7 +208,7 @@
     $(document).ready(function() {
         $(".showUserTable").on("click", function(event){
             event.preventDefault();
-            var href = $(this).attr('href');
+<!--            var href = $(this).attr('href');-->
 <!--            $.get(href, function(perso, status){-->
 <!--                $('#personName').val(perso.name);-->
 <!--                $('#personEmail').val(perso.email);-->
@@ -217,6 +217,7 @@
         });
     });
     </script>
+</script>
     <script>
     var myText = document.getElementById("my-text");
     var result = document.getElementById("result");

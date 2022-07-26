@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
-public class Address extends BaseFormEntity{
+public class Address extends BaseFormEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,8 +22,8 @@ public class Address extends BaseFormEntity{
     @Size(min = 5, message = "Address1 must be at least 5 characters long")
     private String address1;
 
-    @NotBlank(message="Mobile number must not be blank")
-    @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be of 10 digits")
+    @NotBlank(message = "Mobile number must not be blank")
+    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be of 10 digits")
     private String mobileNumber;
 
     @NotBlank(message = "City must not be blank")
@@ -33,6 +33,6 @@ public class Address extends BaseFormEntity{
     private String state;
 
     @NotBlank(message = "Zipcode must not be blank")
-    @Pattern(regexp="(^$|[0-9]{6})",message = "Zip Code must be 6 digits")
+    @Pattern(regexp = "(^$|[0-9]{6})", message = "Zip Code must be 6 digits")
     private String zipCode;
 }

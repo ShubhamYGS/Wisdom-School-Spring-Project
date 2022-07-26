@@ -4,19 +4,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Career extends BaseFormEntity{
+public class Career extends BaseFormEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,7 +45,7 @@ public class Career extends BaseFormEntity{
     private String state;
 
     @NotBlank(message = "Zipcode must not be blank")
-    @Pattern(regexp="(^$|[0-9]{6})",message = "Zip Code must be 6 digits")
+    @Pattern(regexp = "(^$|[0-9]{6})", message = "Zip Code must be 6 digits")
     private String zipCode;
 
     private String yourself;

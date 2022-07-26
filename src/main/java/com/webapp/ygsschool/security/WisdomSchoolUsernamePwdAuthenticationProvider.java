@@ -37,7 +37,7 @@ public class WisdomSchoolUsernamePwdAuthenticationProvider implements Authentica
 
         //It will return null if no any person with provided mail id exists
         //Also check if password provided by user is matching with password stored in db(Hash format)
-        if(person!=null && person.getPersonId()>0 && passwordEncoder.matches(pwd,person.getPwd())) {
+        if (person != null && person.getPersonId() > 0 && passwordEncoder.matches(pwd, person.getPwd())) {
             return new UsernamePasswordAuthenticationToken(
                     //Instead of returning password return null (Spring also by default erases everything)
                     email, null, getGrantedAuthorities(person.getRoles()));
@@ -49,7 +49,7 @@ public class WisdomSchoolUsernamePwdAuthenticationProvider implements Authentica
     //Taking the respective role and making it granted by using grantedAuthority
     public List<GrantedAuthority> getGrantedAuthorities(Roles roles) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+roles.getRoleName()));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + roles.getRoleName()));
         return grantedAuthorities;
     }
 

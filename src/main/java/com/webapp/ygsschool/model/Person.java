@@ -3,7 +3,6 @@ package com.webapp.ygsschool.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webapp.ygsschool.annotation.FieldsValueMatch;
 import com.webapp.ygsschool.annotation.PasswordValidator;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +21,7 @@ import java.util.Set;
         fieldMatch = "confirmpwd",
         message = "Passwords do not match."
 )
-public class Person extends BaseFormEntity{
+public class Person extends BaseFormEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,7 +46,7 @@ public class Person extends BaseFormEntity{
     private String resetPasswordToken;
 
     /*
-    * @Transient annotation make spring consider that this field is not compulsory for db table (ignore)*/
+     * @Transient annotation make spring consider that this field is not compulsory for db table (ignore)*/
 
     @NotBlank(message = "Password must not be blank")
     @Transient

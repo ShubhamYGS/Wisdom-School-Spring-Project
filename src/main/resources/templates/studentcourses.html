@@ -42,7 +42,7 @@
         <div class="row justify-content-center">
             <ul style="width: 70%; margin: auto;">
                 <li class="alert alert-success text-center" role="alert" th:if="${!#strings.isEmpty(unEnrollMessage)}"
-                    th:text="${unEnrollMessage}" />
+                    th:text="${unEnrollMessage}"/>
             </ul>
             <table>
                 <tr th:each="course: ${courses}">
@@ -94,7 +94,8 @@
                     </li>
                 </span>
                 <li>
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/student/displayCourses/page/' + ${currentPage + 1}}">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/student/displayCourses/page/' + ${currentPage + 1}}">
                         <span class="fa fa-angle-double-right" aria-hidden="true"></span>
                     </a>
                     <a th:unless="${currentPage < totalPages}" class="not-allowed" disabled="">
@@ -114,6 +115,7 @@
 <script>
         const randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         document.documentElement.style.setProperty('--tag-bg-color', randomColor);
+
 
 </script>
 </body>

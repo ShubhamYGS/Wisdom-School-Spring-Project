@@ -4,21 +4,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class ProjectSecurityConfig  {
+public class ProjectSecurityConfig {
 
     /**
      * From Spring Security 5.7, the WebSecurityConfigurerAdapter is deprecated to encourage users
      * to move towards a component-based security configuration. It is recommended to create a bean
      * of type SecurityFilterChain for security related configurations.
+     *
      * @param http
      * @return SecurityFilterChain
      * @throws Exception
@@ -26,32 +23,33 @@ public class ProjectSecurityConfig  {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        /**
-         * Default configurations which will secure all the requests
-         */
-		/*((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl)http.authorizeRequests().anyRequest()).
+       /*
+        Default configurations which will secure all the requests
+
+		((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl)http.authorizeRequests().anyRequest()).
 				authenticated();
 		http.formLogin();
 		http.httpBasic();
-		return (SecurityFilterChain)http.build();*/
+		return (SecurityFilterChain)http.build();
 
-        /**
-         * Custom configurations as per our requirement
-         * Redirecting to my custom login page with formLogin
+
+         Custom configurations as per our requirement
+         Redirecting to my custom login page with formLogin
          */
+
         http
-                .authorizeHttpRequests( (auth)->auth
-                    .mvcMatchers("/holidays","/dashboard","/displayProfile","/updateProfile").authenticated()
-                    .mvcMatchers("/","/index","/about","/login","/register","/contact","/career","/forgot","/reset_password/**").permitAll()
-                    .mvcMatchers("/displayMessages","/admin/**","/data-api/**").hasRole("ADMIN")
-                    .mvcMatchers("/student/**").hasRole("STUDENT")
-                   //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
+                .authorizeHttpRequests((auth) -> auth
+                                .mvcMatchers("/holidays", "/dashboard", "/displayProfile", "/updateProfile").authenticated()
+                                .mvcMatchers("/", "/index", "/about", "/login", "/register", "/contact", "/career", "/forgot", "/reset_password/**").permitAll()
+                                .mvcMatchers("/displayMessages", "/admin/**", "/data-api/**").hasRole("ADMIN")
+                                .mvcMatchers("/student/**").hasRole("STUDENT")
+                        //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
-                .csrf().ignoringAntMatchers("/saveMsg","/data-api/**").and()
+                .csrf().ignoringAntMatchers("/saveMsg", "/data-api/**").and()
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(form ->form
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true)
@@ -93,6 +91,7 @@ public class ProjectSecurityConfig  {
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
 
+    // We will be using BCryptPasswordEncoder to Hash our password
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

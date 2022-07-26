@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Data
 @Entity
 @Table(name = "contact_msg")
-public class Contact extends BaseFormEntity{
+public class Contact extends BaseFormEntity {
 
     /*
    * @NotNull: Checks if a given field is not null but allows empty values & zero elements inside collections.
@@ -24,9 +24,9 @@ public class Contact extends BaseFormEntity{
    * */
 
     /*
-    * @Table annotation is used when your Pojo class name and db table name is not same
-    * @Column annotation is used when your field name and table column name is not same (ignore '_')
-    * */
+     * @Table annotation is used when your Pojo class name and db table name is not same
+     * @Column annotation is used when your field name and table column name is not same (ignore '_')
+     * */
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

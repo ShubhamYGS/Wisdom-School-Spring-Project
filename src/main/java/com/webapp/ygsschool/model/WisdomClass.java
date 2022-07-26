@@ -1,6 +1,5 @@
 package com.webapp.ygsschool.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,15 +16,15 @@ import java.util.Set;
 public class WisdomClass extends BaseFormEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int classId;
 
-    @NotBlank(message="Name must not be blank")
-    @Size(min=3, message="Name must be at least 3 characters long")
+    @NotBlank(message = "Name must not be blank")
+    @Size(min = 3, message = "Name must be at least 3 characters long")
     private String name;
 
     //mappedBy denotes that in target class we will be creating a object named as wisdomClass
     @OneToMany(mappedBy = "wisdomClass", fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST,targetEntity = Person.class)
+            cascade = CascadeType.PERSIST, targetEntity = Person.class)
     private Set<Person> persons = new HashSet<>();
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 @Component("auditAwareImpl")
 public class AuditAwareImpl implements AuditorAware<String> {
 
+    // This method returns the name of Current User with the help of Spring Security
     @Override
     public Optional<String> getCurrentAuditor() {
         return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication().getName());

@@ -21,15 +21,17 @@ public class ContactController {
 
     private ContactService contactService;
 
+    // Return the contact Page
     @RequestMapping("/contact")
     public String showContactPage(Model model) {
-        model.addAttribute("contact",new Contact());
+        model.addAttribute("contact", new Contact());
         return "contact.html";
     }
 
+    // Performing DI/Autowiring with the help of constructor
     @Autowired
-    public ContactController(ContactService contactService){
-        this.contactService=contactService;
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
     }
 
     //First way
@@ -44,31 +46,40 @@ public class ContactController {
 
     //Second way using POJO class and service class
     @PostMapping(value = "/saveMsg")
-    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors){
-        if(errors.hasErrors()) {
-            log.error("Contact form validation failed due to: "+errors);
+    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
+        // If there are any validation errors return the page with errors
+        if (errors.hasErrors()) {
+            log.error("Contact form validation failed due to: " + errors);
             return "contact.html";
         }
         contactService.saveMessageDetails(contact);
         return "redirect:/contact";
     }
 
+    // Displaying Admin Career Page with JPA Pagination & Sorting
     @RequestMapping("/displayMessages/page/{pageNum}")
     public ModelAndView displayMessages(Model model, @PathVariable(name = "pageNum") int pageNum,
-            @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir) {
-        Page<Contact> msgPage = contactService.findMsgsWithOpenStatus(pageNum,sortField,sortDir);
+                                        @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir) {
+        // Taking the messagePage as Page return type with Page number, Sorting field & Direction
+        Page<Contact> msgPage = contactService.findMsgsWithOpenStatus(pageNum, sortField, sortDir);
+
+        // Taking the content out of Page<Contact>
         List<Contact> contactMsgs = msgPage.getContent();
+
         ModelAndView modelAndView = new ModelAndView("messages.html");
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", msgPage.getTotalPages());
         model.addAttribute("totalMsgs", msgPage.getTotalElements());
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
+
+        //Checking and returning the sort direction with if else condition
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-        modelAndView.addObject("contactMsgs",contactMsgs);
+        modelAndView.addObject("contactMsgs", contactMsgs);
         return modelAndView;
     }
 
+    //Closing the message by returning displayMessages page with default value(Page: 1, sortField: Name & Direction: Descending)
     @RequestMapping("/closeMsg")
     public String closeMsg(@RequestParam int id, Authentication authentication) {
         contactService.updateMsgStatus(id, authentication.getName());

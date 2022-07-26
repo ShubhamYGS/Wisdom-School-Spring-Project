@@ -19,118 +19,119 @@ Author URL: http://w3layouts.com
 </head>
 
 <body>
-    <!-- header -->
-    <div id="header" th:replace="header :: header"></div>
-    <!-- header -->
+<!-- header -->
+<div id="header" th:replace="header :: header"></div>
+<!-- header -->
 
-    <!-- inner banner -->
-    <section class="inner-banner py-4">
-        <div class="w3l-breadcrumb py-lg-4">
-            <div class="container pt-4 pb-sm-4">
-                <h4 class="inner-text-title pt-5">Contact Us</h4>
-                <ul class="breadcrumbs-custom-path">
-                    <li><a th:href="@{/index}">Home</a></li>
-                    <li class="active"><i class="fas fa-angle-right"></i>Contact Us</li>
-                </ul>
-            </div>
+<!-- inner banner -->
+<section class="inner-banner py-4">
+    <div class="w3l-breadcrumb py-lg-4">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title pt-5">Contact Us</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a th:href="@{/index}">Home</a></li>
+                <li class="active"><i class="fas fa-angle-right"></i>Contact Us</li>
+            </ul>
         </div>
-    </section>
-    <!-- //inner banner -->
+    </div>
+</section>
+<!-- //inner banner -->
 
-    <!-- contact block -->
-    <section class="w3l-contact py-4" id="contact">
-        <div class="container py-md-4 py-4">
-            <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
-                <p class="text-uppercase">Get In Touch</p>
-                <h3 class="title-style">Contact Us</h3>
-            </div>
-            <div class="row contact-block">
-                <div class="col-md-7 contact-right">
-                    <ul>
-                        <li class="alert alert-danger" role="alert"
-                            th:each="error: ${#fields.errors('contact.*')}" th:text="${error}">
-                        </li>
-                    </ul>
-                    <form action="/saveMsg" method="post" class="signin-form" th:object="${contact}">
-                        <div class="input-grids">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <input type="text" th:field="*{name}" placeholder="Your Name"
-                                        class="contact-input" required/>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="email" th:field="*{email}" placeholder="Your Email"
-                                        class="contact-input" required/>
-                                </div>
+<!-- contact block -->
+<section class="w3l-contact py-4" id="contact">
+    <div class="container py-md-4 py-4">
+        <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
+            <p class="text-uppercase">Get In Touch</p>
+            <h3 class="title-style">Contact Us</h3>
+        </div>
+        <div class="row contact-block">
+            <div class="col-md-7 contact-right">
+                <ul>
+                    <li class="alert alert-danger" role="alert"
+                        th:each="error: ${#fields.errors('contact.*')}" th:text="${error}">
+                    </li>
+                </ul>
+                <form action="/saveMsg" method="post" class="signin-form" th:object="${contact}">
+                    <div class="input-grids">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" th:field="*{name}" placeholder="Your Name"
+                                       class="contact-input" required/>
                             </div>
-                            <input type="text" th:field="*{subject}" placeholder="Subject"
-                                class="contact-input" required/>
+                            <div class="col-sm-6">
+                                <input type="email" th:field="*{email}" placeholder="Your Email"
+                                       class="contact-input" required/>
+                            </div>
                         </div>
-                        <div class="form-input">
+                        <input type="text" th:field="*{subject}" placeholder="Subject"
+                               class="contact-input" required/>
+                    </div>
+                    <div class="form-input">
                             <textarea name="message" th:field="*{message}" placeholder="Type your message here"
                             ></textarea>
+                    </div>
+                    <div class="text-start">
+                        <button class="btn btn-style btn-style-3">Send Message</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5 ps-lg-5 mt-md-0 mt-5">
+                <div class="contact-left">
+                    <div class="cont-details">
+                        <div class="d-flex contact-grid">
+                            <div class="cont-left text-center me-3">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="cont-right">
+                                <h6>School Address</h6>
+                                <p>Wisdom School, #06 lane street, MH Sangli - 416310.</p>
+                            </div>
                         </div>
-                        <div class="text-start">
-                            <button class="btn btn-style btn-style-3">Send Message</button>
+                        <div class="d-flex contact-grid mt-4 pt-lg-2">
+                            <div class="cont-left text-center me-3">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="cont-right">
+                                <h6>Call Us</h6>
+                                <p><a href="tel:+91 21234 45678">+91 21234 45678</a></p>
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <div class="col-md-5 ps-lg-5 mt-md-0 mt-5">
-                    <div class="contact-left">
-                        <div class="cont-details">
-                            <div class="d-flex contact-grid">
-                                <div class="cont-left text-center me-3">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                                <div class="cont-right">
-                                    <h6>School Address</h6>
-                                    <p>Wisdom School, #06 lane street, MH Sangli - 416310.</p>
-                                </div>
+                        <div class="d-flex contact-grid mt-4 pt-lg-2">
+                            <div class="cont-left text-center me-3">
+                                <i class="fas fa-envelope-open-text"></i>
                             </div>
-                            <div class="d-flex contact-grid mt-4 pt-lg-2">
-                                <div class="cont-left text-center me-3">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div class="cont-right">
-                                    <h6>Call Us</h6>
-                                    <p><a href="tel:+91 21234 45678">+91 21234 45678</a></p>
-                                </div>
+                            <div class="cont-right">
+                                <h6>Email Us</h6>
+                                <p><a href="mailto:contact@wisdomschool.com" class="mail">contact@wisdomschool.com</a>
+                                </p>
                             </div>
-                            <div class="d-flex contact-grid mt-4 pt-lg-2">
-                                <div class="cont-left text-center me-3">
-                                    <i class="fas fa-envelope-open-text"></i>
-                                </div>
-                                <div class="cont-right">
-                                    <h6>Email Us</h6>
-                                    <p><a href="mailto:contact@wisdomschool.com" class="mail">contact@wisdomschool.com</a></p>
-                                </div>
+                        </div>
+                        <div class="d-flex contact-grid mt-4 pt-lg-2">
+                            <div class="cont-left text-center me-3">
+                                <i class="fas fa-headphones-alt"></i>
                             </div>
-                            <div class="d-flex contact-grid mt-4 pt-lg-2">
-                                <div class="cont-left text-center me-3">
-                                    <i class="fas fa-headphones-alt"></i>
-                                </div>
-                                <div class="cont-right">
-                                    <h6>Customer Support</h6>
-                                    <p><a href="mailto:info@wisdomschool.com" class="mail">info@wisdomschool.com</a></p>
-                                </div>
+                            <div class="cont-right">
+                                <h6>Customer Support</h6>
+                                <p><a href="mailto:info@wisdomschool.com" class="mail">info@wisdomschool.com</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- map -->
-    <div class="map">
-        <iframe
+    </div>
+</section>
+<!-- map -->
+<div class="map">
+    <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61094.96039423669!2d74.5490803687234!3d16.854361476239056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc10c8187f060eb%3A0x37911f53cdc1ddb3!2sSangli%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1655818460632!5m2!1sen!2sin"
             width="100%" height="400" frameborder="0" style="border: 0px;" allowfullscreen=""></iframe>
-    </div>
-    <!-- //contact block -->
+</div>
+<!-- //contact block -->
 
-    <!-- footer block -->
-    <div th:replace="footer :: footer"></div>
-    <!-- //footer block -->
+<!-- footer block -->
+<div th:replace="footer :: footer"></div>
+<!-- //footer block -->
 </body>
 
 </html>

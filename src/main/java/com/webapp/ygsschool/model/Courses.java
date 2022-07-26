@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Courses extends BaseFormEntity{
+public class Courses extends BaseFormEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
