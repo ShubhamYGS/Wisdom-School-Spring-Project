@@ -5,6 +5,7 @@ import com.webapp.ygsschool.model.Person;
 import com.webapp.ygsschool.repository.CoursesRepository;
 import com.webapp.ygsschool.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,10 @@ public class StudentController {
     @Autowired
     private PersonRepository personRepository;
 
+    // Configurations inside application.properties file
+    @Value("${wisdomschool.course.pagesize}")
+    private int deafultPageSize;
+
     /***********************************
      *       COURSES SECTION           *
      ***********************************/
@@ -37,8 +42,7 @@ public class StudentController {
     public ModelAndView showCoursesPage(Model model, @PathVariable(name = "pageNum") int pageNum, Authentication authentication) {
 
         // Setting up the maximum courses one page can have (1 page 3 courses)
-        int pageSize = 3;
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, deafultPageSize);
 
         // Get all the pages
         Page<Courses> coursesPage = coursesRepository.findAll(pageable);
@@ -61,8 +65,7 @@ public class StudentController {
     @GetMapping("/displayCourses/page/{pageNum}")
     public ModelAndView modelAndView(Model model, @PathVariable(name = "pageNum") int pageNum,
                                      Authentication authentication) {
-        int pageSize = 3;
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, deafultPageSize);
 
         // Display only courses enrolled by student
         Person personEntity = personRepository.findByEmail(authentication.getName());

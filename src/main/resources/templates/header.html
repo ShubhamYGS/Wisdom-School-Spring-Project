@@ -45,6 +45,16 @@
                         <a th:classappend="${#httpServletRequest.getRequestURI() == '/career' ? 'active':''}"
                            class="nav-link" th:href="@{/career}">Career</a>
                     </li>
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Miscellaneous <i class="fas fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                            <li><a class="dropdown-item" th:href="@{/data-api/profile}" th:target="_blank">Data Rest</a></li>
+                            <li><a class="dropdown-item" th:href="@{/data-api}" th:target="_blank">HAL Explorer</a></li>
+                            <li><a class="dropdown-item" th:href="@{/wisdom/actuator}" th:target="_blank">Actuator</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul>
                     <li>

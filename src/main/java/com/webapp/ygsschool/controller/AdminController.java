@@ -8,6 +8,7 @@ import com.webapp.ygsschool.repository.PersonRepository;
 import com.webapp.ygsschool.repository.WisdomClassRepository;
 import com.webapp.ygsschool.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,6 +43,10 @@ public class AdminController {
 
     @Autowired
     private FileUploadService fileUploadService;
+
+    // Configurations inside application.properties file
+    @Value("${wisdomschool.course.pagesize}")
+    private int deafultPageSize;
 
     /***********************************
      *         CLASS SECTION           *
@@ -190,8 +195,7 @@ public class AdminController {
         }
 
         // Defining page size and accepting all the courses in Page as return type (Pages will be 0,1,2)
-        int pageSize = 3;
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, deafultPageSize);
         Page<Courses> coursesPage = coursesRepository.findAll(pageable);
 
         // Take content out of coursePage and fill it in list of courses
