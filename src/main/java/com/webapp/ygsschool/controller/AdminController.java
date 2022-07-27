@@ -46,7 +46,7 @@ public class AdminController {
 
     // Configurations inside application.properties file
     @Value("${wisdomschool.course.pagesize}")
-    private int deafultPageSize;
+    private int defaultPageSize;
 
     /***********************************
      *         CLASS SECTION           *
@@ -195,7 +195,7 @@ public class AdminController {
         }
 
         // Defining page size and accepting all the courses in Page as return type (Pages will be 0,1,2)
-        Pageable pageable = PageRequest.of(pageNum - 1, deafultPageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, defaultPageSize);
         Page<Courses> coursesPage = coursesRepository.findAll(pageable);
 
         // Take content out of coursePage and fill it in list of courses
@@ -208,7 +208,7 @@ public class AdminController {
         modelAndView.addObject("courses", coursesList);
         modelAndView.addObject("person", new Person());
 
-        Optional<Courses> courseList = coursesRepository.findById(66);
+        Optional<Courses> courseList = coursesRepository.findById(1);
         Set<Person> personList = courseList.get().getPersons();
         model.addAttribute("personList", personList);
         return modelAndView;
