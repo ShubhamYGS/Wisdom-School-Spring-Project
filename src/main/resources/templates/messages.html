@@ -43,6 +43,8 @@
                 <h3 class="heading-21921">Open Contact Messages</h3>
             </div>
         </div>
+        <li class="alert alert-success text-center" role="alert"
+            th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
         <table class="table table-striped table-hover dataTable" style="text-align:center">
             <thead class="table-dark">
             <tr>

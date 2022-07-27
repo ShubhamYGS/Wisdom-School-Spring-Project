@@ -122,7 +122,7 @@ public class AdminController {
 
     // To add New Student to Class
     @PostMapping("/addStudent")
-    public ModelAndView addNewStudent(Model model, @ModelAttribute("person") Person person, HttpSession httpSession) {
+    public ModelAndView addNewStudent(Model model, @ModelAttribute("person") Person person, HttpSession httpSession, RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView();
 
         //Taking the attribute passed from displayStudents() method
@@ -152,13 +152,14 @@ public class AdminController {
         personRepository.save(personEntity);
         wisdomClass.getPersons().add(personEntity);
         wisdomClassRepository.save(wisdomClass);
+        redirectAttributes.addFlashAttribute("successMessage",personEntity.getName()+" has been successfully added to "+wisdomClass.getName());
         modelAndView.setViewName("redirect:/admin/displayStudents?classId=" + wisdomClass.getClassId());
         return modelAndView;
     }
 
     // To Delete Student from Class
     @GetMapping("/deleteStudent")
-    public ModelAndView deleteStudent(Model model, @RequestParam int personId, HttpSession httpSession) {
+    public ModelAndView deleteStudent(Model model, @RequestParam int personId, HttpSession httpSession, RedirectAttributes redirectAttributes) {
         // Taking session attribute passed from displayStudent() method
         WisdomClass wisdomClass = (WisdomClass) httpSession.getAttribute("wisdomClass");
 
@@ -169,6 +170,7 @@ public class AdminController {
         WisdomClass wisdomClassSaved = wisdomClassRepository.save(wisdomClass);
 
         httpSession.setAttribute("wisdomClass", wisdomClassSaved);
+        redirectAttributes.addFlashAttribute("successMessage",person.get().getName()+" has been successfully removed from "+wisdomClass.getName());
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayStudents?classId=" + wisdomClass.getClassId());
         return modelAndView;
     }

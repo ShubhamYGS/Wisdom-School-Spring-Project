@@ -42,8 +42,12 @@
     <div class="table-responsive-class">
 
         <div class="row mb-4">
-            <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
-                th:text="${errorMessage}"/>
+            <ul>
+                <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+                    th:text="${errorMessage}"></li>
+                <li class="alert alert-success text-center" role="alert"
+                    th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
+            </ul>
             <div class="overview-wrap">
                 <h3 class="heading-21921" th:text="${wisdomClass.name} + ' Students Details'"></h3>
                 <button class="btn main-btn" type="button"

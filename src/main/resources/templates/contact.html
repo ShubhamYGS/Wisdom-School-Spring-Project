@@ -50,6 +50,8 @@ Author URL: http://w3layouts.com
                     <li class="alert alert-danger" role="alert"
                         th:each="error: ${#fields.errors('contact.*')}" th:text="${error}">
                     </li>
+                    <li class="alert alert-success text-center" role="alert"
+                        th:if="${!#strings.isEmpty(successMessage)}" th:text="${successMessage}"></li>
                 </ul>
                 <form action="/saveMsg" method="post" class="signin-form" th:object="${contact}">
                     <div class="input-grids">

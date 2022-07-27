@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -46,13 +47,14 @@ public class ContactController {
 
     //Second way using POJO class and service class
     @PostMapping(value = "/saveMsg")
-    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
+    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors, RedirectAttributes redirectAttributes) {
         // If there are any validation errors return the page with errors
         if (errors.hasErrors()) {
             log.error("Contact form validation failed due to: " + errors);
             return "contact.html";
         }
         contactService.saveMessageDetails(contact);
+        redirectAttributes.addFlashAttribute("successMessage","Your query has been submitted successfully. We will get to back to you within 24 hrs.");
         return "redirect:/contact";
     }
 
@@ -81,8 +83,9 @@ public class ContactController {
 
     //Closing the message by returning displayMessages page with default value(Page: 1, sortField: Name & Direction: Descending)
     @RequestMapping("/closeMsg")
-    public String closeMsg(@RequestParam int id, Authentication authentication) {
+    public String closeMsg(@RequestParam int id, Authentication authentication, RedirectAttributes redirectAttributes) {
         contactService.updateMsgStatus(id, authentication.getName());
+        redirectAttributes.addFlashAttribute("successMessage","Ticket has been closed successfully");
         return "redirect:/displayMessages/page/1?sortField=name&sortDir=desc";
     }
 }
