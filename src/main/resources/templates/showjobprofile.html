@@ -46,9 +46,7 @@
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!--                        <embed th:src="@{${'/assets/uploadfile/'+career.resume}}"-->
-                        <!--                               frameborder="0" width="100%" height="400px">-->
-                        <iframe width="100%" height="400px" th:src="@{${'/assets/uploadfile/'+career.resume}}"></iframe>
+                       <iframe width="100%" height="400px" th:src="@{${'/assets/uploadfile/'+career.resume}+'#toolbar=0&navpanes=0&scrollbar=0'}"></iframe>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="submit" data-bs-dismiss="modal" class="btn btn-style btn-style-3">Close</button>
@@ -102,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="py-md-4 py-4 col-xxl-4 col-sm-9" style="margin: auto;">
+        <div class="py-md-4 py-4 col-xxl-4 container" style="margin: auto; width: 75%;">
             <div class="card shadow-lg">
                 <div class="card-body p-5">
                     <ul>

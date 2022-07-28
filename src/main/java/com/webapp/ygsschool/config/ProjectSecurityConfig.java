@@ -35,6 +35,8 @@ public class ProjectSecurityConfig {
 
          Custom configurations as per our requirement
          Redirecting to my custom login page with formLogin
+
+         Disabling the frame options to show pdf
          */
 
         http
@@ -45,6 +47,7 @@ public class ProjectSecurityConfig {
                                 .mvcMatchers("/student/**").hasRole("STUDENT")
                         //     .mvcMatchers("/","/index","/about","/login","/register","/holidays","/courses","/contact").permitAll()
                 )
+                .headers().frameOptions().disable().and()
                 .csrf().ignoringAntMatchers("/saveMsg", "/data-api/**","/wisdom/actuator/**").and()
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
