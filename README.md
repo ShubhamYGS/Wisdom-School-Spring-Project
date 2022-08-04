@@ -19,8 +19,8 @@ This app is mainly categorised into three major sections:
   - **Website Page:** Any anonymous user can see our website. He has access to Contact Us, About Us and Apply for Job Pages.
   - **Login/Register/Forgot Password**: Users can also Register to Website, Login into the website. Or, in case they forgot their password they can reset it easily.
 
-## Video Demo (Time: 2 minute)
-Coming soon
+## Video Demo
+[![Wisdom School Spring Project](https://img.youtube.com/vi/9x5NrEKExTI/0.jpg)](https://www.youtube.com/watch?v=9x5NrEKExTI)
 
 ## Features
 * Different User Profiles/Roles: ADMIN, STUDENT.
